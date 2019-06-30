@@ -6,6 +6,8 @@ import compression from 'compression'
 import cors from 'cors'
 import schema from './app/schema'
 
+import './db/mongoose'
+
 const app = express()
 
 const server = new ApolloServer({
