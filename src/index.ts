@@ -1,16 +1,20 @@
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
-import depthLimit from 'graphql-depth-limit'
 import { createServer } from 'http'
 import compression from 'compression'
 import cors from 'cors'
-import schema from './app/schema'
+import context from './app/context'
+import typeDefs from './app/typeDefs'
+import resolvers from './app/resolvers/rootResolver'
+
+import './db/mongoose'
 
 const app = express()
 
 const server = new ApolloServer({
-	schema,
-	validationRules: [depthLimit(7)],
+	typeDefs,
+	resolvers,
+	context,
 })
 
 app.use('*', cors())
