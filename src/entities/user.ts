@@ -8,11 +8,10 @@ class User extends Typegoose {
 	@prop({ required: true })
 	email: string
 
-	@prop({ required: true })
-	password: string
+	// @prop({ required: true })
+	// password: string
 }
 
 export default new User().getModelForClass(User, {
-	existingMongoose: mongoose,
 	schemaOptions: { collection: 'user' },
 })
