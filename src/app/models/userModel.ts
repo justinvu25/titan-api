@@ -11,8 +11,6 @@ import { SALT_ROUNDS, JWT_EXPIRY } from '@/utils/constants'
 
 interface UserConnector {
 	getAllUsers: Function
-	registerUser: Function
-	login: Function
 	createUser: Function
 	findUserByEmail: Function
 }
@@ -32,7 +30,7 @@ class User {
 		const user = await this.connector.findUserByEmail(userData.email)
 
 		if (user) {
-			throw new Error('User already exists')
+			throw new Error('User already exists.')
 		}
 
 		const hashedPassword = bcrypt.hashSync(userData.password, SALT_ROUNDS)
@@ -49,26 +47,28 @@ class User {
 	async login(loginCredentials: LoginCredentials): Promise<LoginPayload> {
 		const user = await this.connector.findUserByEmail(loginCredentials.email)
 
-		if (user) {
-			const hashedPassword = bcrypt.hashSync(
-				loginCredentials.password,
-				SALT_ROUNDS,
-			)
-			if (bcrypt.compare(user.password, hashedPassword)) {
-				const token = jwt.sign(
-					{ user: pick(user, ['_id']) },
-					process.env.JWT_SECRET,
-					{
-						expiresIn: JWT_EXPIRY,
-					},
-				)
-				return {
-					accessToken: token,
+		if (!user) {
+			throw new Error('This user does not exist.')
+		}
+
+		const hashedPassword = bcrypt.hashSync(
+			loginCredentials.password,
+			SALT_ROUNDS,
+		)
+		if (bcrypt.compare(user.password, hashedPassword)) {
+			const token = jwt.sign(
+				{ user: pick(user, ['_id']) },
+				process.env.JWT_SECRET,
+				{
 					expiresIn: JWT_EXPIRY,
-				}
+				},
+			)
+			return {
+				accessToken: token,
+				expiresIn: JWT_EXPIRY,
 			}
 		}
-		throw new Error('Something went wrong.')
+		throw new Error('Email or password is incorrect.')
 	}
 }
 

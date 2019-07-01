@@ -3,10 +3,11 @@ import { UserInput, UserPayload } from '@/ts-types/user'
 
 class UserConnector {
 	async createUser(userData: UserInput): Promise<UserPayload> {
+		const { name, email, password } = userData
 		const user = await User.create({
-			name: userData.name,
-			email: userData.email,
-			password: userData.email,
+			name,
+			email,
+			password,
 		})
 		return user
 	}
