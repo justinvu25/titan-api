@@ -14,9 +14,10 @@ const Mutation = gql`
 		registerUser(input: RegisterUserInput!): User!
 		deleteUser: DeleteUserPayload!
 		login(input: LoginCredentials!): LoginPayload!
+		createRoom(input: CreateRoomMutationArgs!): Room!
 	}
 `
 
-const typeDefs = [Query, Mutation, User]
+const typeDefs = [Query, Mutation, User, Room]
 
 export default typeDefs

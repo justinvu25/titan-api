@@ -8,14 +8,14 @@ export interface RegisterUserInput {
 	password: string
 }
 
-export interface DeleteUserInput {
-	id: string
-}
-
 export interface LoginCredentials {
 	email: string
 
 	password: string
+}
+
+export interface CreateRoomMutationArgs {
+	name: string
 }
 
 export enum CacheControlScope {
@@ -36,6 +36,8 @@ export type Upload = any
 
 export interface Query {
 	users: User[]
+
+	user: User
 }
 
 export interface User {
@@ -52,6 +54,8 @@ export interface Mutation {
 	deleteUser: DeleteUserPayload
 
 	login: LoginPayload
+
+	createRoom: Room
 }
 
 export interface DeleteUserPayload {
@@ -64,6 +68,18 @@ export interface LoginPayload {
 	expiresIn: string
 }
 
+export interface Room {
+	name: string
+
+	userIds: string[]
+
+	pin: string
+
+	sessionStarted?: Maybe<boolean>
+
+	votingCompleted?: Maybe<boolean>
+}
+
 // ====================================================
 // Arguments
 // ====================================================
@@ -71,11 +87,11 @@ export interface LoginPayload {
 export interface RegisterUserMutationArgs {
 	input: RegisterUserInput
 }
-export interface DeleteUserMutationArgs {
-	input: DeleteUserInput
-}
 export interface LoginMutationArgs {
 	input: LoginCredentials
+}
+export interface CreateRoomMutationArgs {
+	input: CreateRoomMutationArgs
 }
 
 import {
@@ -135,6 +151,8 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
 
 export interface QueryResolvers<TContext = {}, TypeParent = {}> {
 	users?: QueryUsersResolver<User[], TypeParent, TContext>
+
+	user?: QueryUserResolver<User, TypeParent, TContext>
 }
 
 export type QueryUsersResolver<
@@ -142,6 +160,11 @@ export type QueryUsersResolver<
 	Parent = {},
 	TContext = {}
 > = Resolver<R, Parent, TContext>
+export type QueryUserResolver<R = User, Parent = {}, TContext = {}> = Resolver<
+	R,
+	Parent,
+	TContext
+>
 
 export interface UserResolvers<TContext = {}, TypeParent = User> {
 	_id?: User_IdResolver<string, TypeParent, TContext>
@@ -177,6 +200,8 @@ export interface MutationResolvers<TContext = {}, TypeParent = {}> {
 	>
 
 	login?: MutationLoginResolver<LoginPayload, TypeParent, TContext>
+
+	createRoom?: MutationCreateRoomResolver<Room, TypeParent, TContext>
 }
 
 export type MutationRegisterUserResolver<
@@ -192,11 +217,7 @@ export type MutationDeleteUserResolver<
 	R = DeleteUserPayload,
 	Parent = {},
 	TContext = {}
-> = Resolver<R, Parent, TContext, MutationDeleteUserArgs>
-export interface MutationDeleteUserArgs {
-	input: DeleteUserInput
-}
-
+> = Resolver<R, Parent, TContext>
 export type MutationLoginResolver<
 	R = LoginPayload,
 	Parent = {},
@@ -204,6 +225,15 @@ export type MutationLoginResolver<
 > = Resolver<R, Parent, TContext, MutationLoginArgs>
 export interface MutationLoginArgs {
 	input: LoginCredentials
+}
+
+export type MutationCreateRoomResolver<
+	R = Room,
+	Parent = {},
+	TContext = {}
+> = Resolver<R, Parent, TContext, MutationCreateRoomArgs>
+export interface MutationCreateRoomArgs {
+	input: CreateRoomMutationArgs
 }
 
 export interface DeleteUserPayloadResolvers<
@@ -236,6 +266,52 @@ export type LoginPayloadAccessTokenResolver<
 export type LoginPayloadExpiresInResolver<
 	R = string,
 	Parent = LoginPayload,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+
+export interface RoomResolvers<TContext = {}, TypeParent = Room> {
+	name?: RoomNameResolver<string, TypeParent, TContext>
+
+	userIds?: RoomUserIdsResolver<string[], TypeParent, TContext>
+
+	pin?: RoomPinResolver<string, TypeParent, TContext>
+
+	sessionStarted?: RoomSessionStartedResolver<
+		Maybe<boolean>,
+		TypeParent,
+		TContext
+	>
+
+	votingCompleted?: RoomVotingCompletedResolver<
+		Maybe<boolean>,
+		TypeParent,
+		TContext
+	>
+}
+
+export type RoomNameResolver<
+	R = string,
+	Parent = Room,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type RoomUserIdsResolver<
+	R = string[],
+	Parent = Room,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type RoomPinResolver<
+	R = string,
+	Parent = Room,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type RoomSessionStartedResolver<
+	R = Maybe<boolean>,
+	Parent = Room,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type RoomVotingCompletedResolver<
+	R = Maybe<boolean>,
+	Parent = Room,
 	TContext = {}
 > = Resolver<R, Parent, TContext>
 
@@ -294,6 +370,7 @@ export type IResolvers<TContext = {}> = {
 	Mutation?: MutationResolvers<TContext>
 	DeleteUserPayload?: DeleteUserPayloadResolvers<TContext>
 	LoginPayload?: LoginPayloadResolvers<TContext>
+	Room?: RoomResolvers<TContext>
 	Upload?: GraphQLScalarType
 } & { [typeName: string]: never }
 
