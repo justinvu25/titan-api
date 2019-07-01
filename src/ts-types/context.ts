@@ -7,6 +7,7 @@ export interface Context {
 			getAllUsers: Function
 			login: Function
 			deleteUser: Function
+			getUser: Function
 		}
 	}
 	user: {
