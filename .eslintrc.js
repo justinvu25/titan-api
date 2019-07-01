@@ -1,6 +1,6 @@
 module.exports = {
 	parser: '@typescript-eslint/parser',
-	plugins: ['@typescript-eslint', 'node', 'jest'],
+	plugins: ['@typescript-eslint', 'node'],
 	extends: [
 		'eslint:recommended',
 		'plugin:node/recommended',
@@ -34,9 +34,6 @@ module.exports = {
 			},
 		},
 	],
-	env: {
-		'jest/globals': true,
-	},
 	settings: {
 		'import/parsers': {
 			'@typescript-eslint/parser': ['.ts'],

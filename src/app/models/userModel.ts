@@ -10,8 +10,8 @@ class User {
 		return this.connector.getAllUsers()
 	}
 
-	async createUser(userData: IUserInput) {
-		return this.connector.createUser(userData)
+	async registerUser(userData: IUserInput) {
+		return this.connector.registerUser(userData)
 	}
 }
 

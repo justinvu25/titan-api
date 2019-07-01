@@ -7,8 +7,9 @@ export default gql`
 		email: String!
 	}
 
-	input CreateUserInput {
+	input RegisterUserInput {
 		name: String!
 		email: String!
+		password: String!
 	}
 `

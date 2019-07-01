@@ -1,6 +1,6 @@
 import { IUserInput } from '../../../ts-types/user'
 
-const createUser = async (
+const registerUser = async (
 	_parent: object,
 	args: { input: IUserInput },
 	context: any,
@@ -10,10 +10,10 @@ const createUser = async (
 	} = context
 
 	const {
-		input: { name, email },
+		input: { name, email, password },
 	} = args
-	const user = await User.createUser({ name, email })
+	const user = await User.registerUser({ name, email, password })
 	return user
 }
 
-export default createUser
+export default registerUser

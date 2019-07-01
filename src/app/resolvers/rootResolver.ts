@@ -1,12 +1,12 @@
 import getUsers from './user/getUsers'
-import createUser from './user/createUser'
+import registerUser from './user/registerUser'
 
 const resolver = {
 	Query: {
 		users: getUsers,
 	},
 	Mutation: {
-		createUser,
+		registerUser,
 	},
 }
 
