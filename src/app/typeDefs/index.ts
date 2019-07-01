@@ -1,5 +1,6 @@
 import { gql } from 'apollo-server-express'
 import User from './user'
+import Room from './room'
 
 const Query = gql`
 	type Query {

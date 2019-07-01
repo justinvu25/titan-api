@@ -9,6 +9,9 @@ export interface Context {
 			deleteUser: Function
 			getUser: Function
 		}
+		Room: {
+			createRoom: Function
+		}
 	}
 	user: {
 		id: string
