@@ -29,7 +29,7 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: '**/*.test.ts',
+			files: ['**/*.test.ts', 'ts-types/generated.ts'],
 			rules: {
 				'@typescript-eslint/explicit-function-return-type': 'off',
 				'global-require': 'off',
