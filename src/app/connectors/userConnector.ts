@@ -22,9 +22,13 @@ class UserConnector {
 		return user
 	}
 
+	async findUserById(id: string): Promise<UserPayload> {
+		const user = await User.findById(id)
+		return user
+	}
+
 	async deleteUser(userId: string): Promise<UserPayload> {
 		const user = await User.findByIdAndDelete(userId)
-		console.log('in connector', user)
 		return user
 	}
 }

@@ -22,10 +22,9 @@ export const decodeJwt = (reqHeaders: RequestHeaders): Maybe<DecodedJwt> => {
 		return null
 	}
 
-	const decodedToken = jwt.verify(
-		authorization,
-		process.env.JWT_SECRET,
-	) as DecodeJwtPayload
+	const decodedToken = jwt.verify(authorization, process.env.JWT_SECRET, {
+		algorithms: ['HS256'],
+	}) as DecodeJwtPayload
 
 	if (decodedToken) {
 		const {

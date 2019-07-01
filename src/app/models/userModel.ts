@@ -14,6 +14,7 @@ interface UserConnector {
 	createUser: Function
 	findUserByEmail: Function
 	deleteUser: Function
+	findUserById: Function
 }
 
 class User {
@@ -79,6 +80,15 @@ class User {
 			}
 		}
 		throw new Error('Email or password is incorrect.')
+	}
+
+	async getUser(id: string): Promise<UserPayload> {
+		const user = await this.connector.findUserById(id)
+
+		if (!user) {
+			throw new Error(`Can't find user`)
+		}
+		return user
 	}
 }
 
