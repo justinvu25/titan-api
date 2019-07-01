@@ -1,19 +1,17 @@
-import getUsers from './user/getUsers'
-import registerUser from './user/registerUser'
-import login from './user/login'
-import deleteUser from './user/deleteUser'
-import getUser from './user/getUser'
+import { getUsers, getUser, registerUser, login, deleteUser } from './user'
+
+const mutationResolvers = {
+	registerUser,
+	deleteUser,
+	login,
+}
 
 const resolver = {
 	Query: {
 		users: getUsers,
 		user: getUser,
 	},
-	Mutation: {
-		registerUser,
-		deleteUser,
-		login,
-	},
+	Mutation: mutationResolvers,
 }
 
 export default resolver
