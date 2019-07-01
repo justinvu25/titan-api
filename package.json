@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "src/index.ts' --exec 'ts-node' src/server.ts -e ts,graphql",
+		"start": "ts-node-dev -r tsconfig-paths/register src/index.ts",
 		"start:dev": "nodemon 'src/index.ts' --exec 'ts-node' src/server.ts -e ts,graphql",
 		"lint": "eslint \"src/**/*.ts\"",
 		"format": "prettier --write \"**/*.{ts,js,json,md,yaml,yml}\""
@@ -41,6 +41,7 @@
 		"nodemon": "^1.19.1",
 		"prettier": "1.16.4",
 		"ts-node": "^8.3.0",
+		"ts-node-dev": "^1.0.0-pre.40",
 		"typescript": "^3.5.2"
 	},
 	"dependencies": {
@@ -57,6 +58,7 @@
 		"jsonwebtoken": "^8.5.1",
 		"mongoose": "^5.6.2",
 		"ncp": "^2.0.0",
+		"tsconfig-paths": "^3.8.0",
 		"typegoose": "^5.7.2"
 	}
 }

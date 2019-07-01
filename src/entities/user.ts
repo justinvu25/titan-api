@@ -1,9 +1,8 @@
 import { prop, Typegoose } from 'typegoose'
-import * as mongoose from 'mongoose'
 
 class User extends Typegoose {
 	@prop({ required: true })
-	name?: string
+	name: string
 
 	@prop({ required: true })
 	email: string

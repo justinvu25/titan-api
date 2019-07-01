@@ -1,24 +1,20 @@
-import User from '../../entities/user'
-import { IUserInput } from '@/ts-types/user'
 import * as bcrypt from 'bcrypt'
-import { SALT_ROUNDS } from '../../utils/constants'
+import User from '@/entities/user'
+import { UserInput, UserPayload } from '@/ts-types/user'
+import { SALT_ROUNDS } from '@/utils/constants'
 
 class UserConnector {
-	async getAllUsers(): Promise<object> {
-		try {
-			const users = await User.find()
-			return users
-		} catch (err) {
-			return err
-		}
+	static async getAllUsers(): Promise<UserPayload[]> {
+		const users = await User.find()
+		return users
 	}
 
-	async registerUser(userData: IUserInput): Promise<object> {
+	static async registerUser(userData: UserInput): Promise<UserPayload> {
 		const { name, password, email } = userData
 		const user = await User.findOne({ email })
+
 		if (!user) {
 			const hashedPassword = bcrypt.hashSync(password, SALT_ROUNDS)
-			console.log('hashed password', hashedPassword)
 			if (hashedPassword) {
 				const createdUser = await User.create({
 					name,
@@ -26,10 +22,10 @@ class UserConnector {
 					password: hashedPassword,
 				})
 				return createdUser
-			} else {
-				throw new Error('User could not be created')
 			}
+			throw new Error('User could not be created.')
 		}
+		throw new Error('User already exists.')
 	}
 }
 

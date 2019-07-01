@@ -2,7 +2,7 @@ import UserModel from './models/userModel'
 
 import UserConnector from './connectors/userConnector'
 
-export default async ({ req }: any) => {
+export default (): { models: object } => {
 	const userConnector = new UserConnector()
 
 	const models = {

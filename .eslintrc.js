@@ -15,6 +15,7 @@ module.exports = {
 			'error',
 			{ ignoreDestructuring: true, properties: 'never' },
 		],
+		'@typescript-eslint/explicit-member-accessibility': 'off',
 		'import/no-extraneous-dependencies': [
 			'error',
 			{ devDependencies: ['**/*.test.ts'] },

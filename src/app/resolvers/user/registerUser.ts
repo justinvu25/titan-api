@@ -1,10 +1,11 @@
-import { IUserInput } from '../../../ts-types/user'
+import { UserInput, UserPayload } from '@/ts-types/user'
+import { Context } from '@/ts-types/context'
 
 const registerUser = async (
 	_parent: object,
-	args: { input: IUserInput },
-	context: any,
-) => {
+	args: { input: UserInput },
+	context: Context,
+): Promise<UserPayload> => {
 	const {
 		models: { User },
 	} = context
