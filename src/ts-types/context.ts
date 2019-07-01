@@ -4,6 +4,7 @@ export interface Context {
 			registerUser: Function
 			getAllUsers: Function
 			login: Function
+			deleteUser: Function
 		}
 	}
 }

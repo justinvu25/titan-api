@@ -12,6 +12,10 @@ export default gql`
 		expiresIn: String!
 	}
 
+	type DeleteUserPayload {
+		id: String!
+	}
+
 	input RegisterUserInput {
 		name: String!
 		email: String!
@@ -21,5 +25,9 @@ export default gql`
 	input LoginCredentials {
 		email: String!
 		password: String!
+	}
+
+	input DeleteUserInput {
+		id: String!
 	}
 `

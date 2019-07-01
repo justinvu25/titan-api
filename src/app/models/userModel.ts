@@ -44,6 +44,15 @@ class User {
 		throw new Error('User could not be created.')
 	}
 
+	async deleteUser(userId: string): Promise<UserPayload> {
+		const user = await this.connector.deleteUser(userId)
+
+		if (!user) {
+			throw new Error('User does not exist')
+		}
+		return user
+	}
+
 	async login(loginCredentials: LoginCredentials): Promise<LoginPayload> {
 		const user = await this.connector.findUserByEmail(loginCredentials.email)
 

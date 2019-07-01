@@ -1,6 +1,7 @@
 import getUsers from './user/getUsers'
 import registerUser from './user/registerUser'
 import login from './user/login'
+import deleteUser from './user/deleteUser'
 
 const resolver = {
 	Query: {
@@ -8,6 +9,7 @@ const resolver = {
 	},
 	Mutation: {
 		registerUser,
+		deleteUser,
 		login,
 	},
 }
