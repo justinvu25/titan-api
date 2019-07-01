@@ -12,7 +12,7 @@ interface UserConnector {
 }
 
 class User {
-	public connector: UserConnector
+	connector: UserConnector
 
 	constructor({ connector }: { connector: UserConnector }) {
 		this.connector = connector

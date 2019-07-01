@@ -11,12 +11,12 @@ import {
 import { SALT_ROUNDS, JWT_EXPIRY } from '@/utils/constants'
 
 class UserConnector {
-	static async getAllUsers(): Promise<UserPayload[]> {
+	async getAllUsers(): Promise<UserPayload[]> {
 		const users = await User.find()
 		return users
 	}
 
-	static async registerUser(userData: UserInput): Promise<UserPayload> {
+	async registerUser(userData: UserInput): Promise<UserPayload> {
 		const { name, password, email } = userData
 		const user = await User.findOne({ email })
 
@@ -35,9 +35,7 @@ class UserConnector {
 		throw new Error('User already exists.')
 	}
 
-	static async login(
-		loginCredentials: LoginCredentials,
-	): Promise<LoginPayload> {
+	async login(loginCredentials: LoginCredentials): Promise<LoginPayload> {
 		const { email, password } = loginCredentials
 		const user = await User.findOne({ email })
 

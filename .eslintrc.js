@@ -21,6 +21,7 @@ module.exports = {
 			{ devDependencies: ['**/*.test.ts'] },
 		],
 		'import/prefer-default-export': 'off',
+		'class-methods-use-this': 'off',
 		'node/no-missing-require': 'off',
 		'node/no-unsupported-features/es-syntax': 'off',
 		'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],

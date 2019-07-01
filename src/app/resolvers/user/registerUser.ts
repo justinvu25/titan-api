@@ -13,6 +13,7 @@ const registerUser = async (
 	const {
 		input: { name, email, password },
 	} = args
+
 	const user = await User.registerUser({ name, email, password })
 	return user
 }
