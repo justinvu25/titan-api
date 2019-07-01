@@ -6,7 +6,7 @@ const Query = gql`
 		users: [User!]!
 	}
 	type Mutation {
-		createUser(input: CreateUserInput): User
+		registerUser(input: RegisterUserInput): User
 	}
 `
 
