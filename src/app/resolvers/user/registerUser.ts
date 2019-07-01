@@ -1,11 +1,14 @@
-import { UserInput, UserPayload } from '@/ts-types/user'
+import {
+	RegisterUserMutationArgs,
+	User as UserType,
+} from '@/ts-types/generated'
 import { Context } from '@/ts-types/context'
 
 const registerUser = async (
 	_parent: object,
-	args: { input: UserInput },
+	args: RegisterUserMutationArgs,
 	context: Context,
-): Promise<UserPayload> => {
+): Promise<UserType> => {
 	const {
 		models: { User },
 	} = context

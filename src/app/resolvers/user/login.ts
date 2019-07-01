@@ -1,9 +1,9 @@
-import { LoginCredentials, LoginPayload } from '@/ts-types/user'
+import { LoginMutationArgs, LoginPayload } from '@/ts-types/generated'
 import { Context } from '@/ts-types/context'
 
 const login = async (
 	_parent: object,
-	args: { input: LoginCredentials },
+	args: LoginMutationArgs,
 	context: Context,
 ): Promise<LoginPayload> => {
 	const {
