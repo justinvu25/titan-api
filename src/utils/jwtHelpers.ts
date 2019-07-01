@@ -8,9 +8,7 @@ interface DecodeJwtPayload {
 }
 
 interface DecodedJwt {
-	user: {
-		id: string
-	}
+	id: string
 }
 
 interface RequestHeaders {
@@ -35,9 +33,7 @@ export const decodeJwt = (reqHeaders: RequestHeaders): Maybe<DecodedJwt> => {
 		} = decodedToken
 
 		return {
-			user: {
-				id: _id,
-			},
+			id: _id,
 		}
 	}
 	return null

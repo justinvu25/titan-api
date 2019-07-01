@@ -11,8 +11,6 @@ const deleteUser = async (
 		user,
 	} = context
 
-	console.log(user)
-
 	const { _id } = await User.deleteUser(user.id)
 	return {
 		id: _id,
