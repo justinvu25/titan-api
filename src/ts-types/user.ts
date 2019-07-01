@@ -9,3 +9,13 @@ export interface UserPayload {
 	name: string
 	email: string
 }
+
+export interface LoginCredentials {
+	email: string
+	password: string
+}
+
+export interface LoginPayload {
+	accessToken: string
+	expiresIn: string
+}

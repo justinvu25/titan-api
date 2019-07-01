@@ -1,23 +1,33 @@
-import { UserInput } from '@/ts-types/user'
+import {
+	UserInput,
+	LoginCredentials,
+	LoginPayload,
+	UserPayload,
+} from '@/ts-types/user'
 
 interface UserConnector {
 	getAllUsers: Function
 	registerUser: Function
+	login: Function
 }
 
 class User {
-	public connector: UserConnector
+	connector: UserConnector
 
 	constructor({ connector }: { connector: UserConnector }) {
 		this.connector = connector
 	}
 
-	async getAllUsers(): Promise<object> {
+	async getAllUsers(): Promise<UserPayload[]> {
 		return this.connector.getAllUsers()
 	}
 
-	async registerUser(userData: UserInput): Promise<object> {
+	async registerUser(userData: UserInput): Promise<UserPayload> {
 		return this.connector.registerUser(userData)
+	}
+
+	async login(loginCredentials: LoginCredentials): Promise<LoginPayload> {
+		return this.connector.login(loginCredentials)
 	}
 }
 

@@ -7,7 +7,7 @@ export default (): { models: object } => {
 
 	const models = {
 		User: new UserModel({
-			connector: userConnector,
+			connector: userConnector as any,
 		}),
 	}
 
