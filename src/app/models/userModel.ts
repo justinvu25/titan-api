@@ -13,6 +13,7 @@ interface UserConnector {
 	getAllUsers: Function
 	createUser: Function
 	findUserByEmail: Function
+	deleteUser: Function
 }
 
 class User {
@@ -42,6 +43,15 @@ class User {
 			return createdUser
 		}
 		throw new Error('User could not be created.')
+	}
+
+	async deleteUser(userId: string): Promise<UserPayload> {
+		const user = await this.connector.deleteUser(userId)
+
+		if (!user) {
+			throw new Error('User does not exist')
+		}
+		return user
 	}
 
 	async login(loginCredentials: LoginCredentials): Promise<LoginPayload> {

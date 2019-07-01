@@ -8,6 +8,10 @@ export interface RegisterUserInput {
 	password: string
 }
 
+export interface DeleteUserInput {
+	id: string
+}
+
 export interface LoginCredentials {
 	email: string
 
@@ -45,7 +49,13 @@ export interface User {
 export interface Mutation {
 	registerUser: User
 
+	deleteUser: DeleteUserPayload
+
 	login: LoginPayload
+}
+
+export interface DeleteUserPayload {
+	id: string
 }
 
 export interface LoginPayload {
@@ -60,6 +70,9 @@ export interface LoginPayload {
 
 export interface RegisterUserMutationArgs {
 	input: RegisterUserInput
+}
+export interface DeleteUserMutationArgs {
+	input: DeleteUserInput
 }
 export interface LoginMutationArgs {
 	input: LoginCredentials
@@ -157,6 +170,12 @@ export type UserEmailResolver<
 export interface MutationResolvers<TContext = {}, TypeParent = {}> {
 	registerUser?: MutationRegisterUserResolver<User, TypeParent, TContext>
 
+	deleteUser?: MutationDeleteUserResolver<
+		DeleteUserPayload,
+		TypeParent,
+		TContext
+	>
+
 	login?: MutationLoginResolver<LoginPayload, TypeParent, TContext>
 }
 
@@ -169,6 +188,15 @@ export interface MutationRegisterUserArgs {
 	input: RegisterUserInput
 }
 
+export type MutationDeleteUserResolver<
+	R = DeleteUserPayload,
+	Parent = {},
+	TContext = {}
+> = Resolver<R, Parent, TContext, MutationDeleteUserArgs>
+export interface MutationDeleteUserArgs {
+	input: DeleteUserInput
+}
+
 export type MutationLoginResolver<
 	R = LoginPayload,
 	Parent = {},
@@ -177,6 +205,19 @@ export type MutationLoginResolver<
 export interface MutationLoginArgs {
 	input: LoginCredentials
 }
+
+export interface DeleteUserPayloadResolvers<
+	TContext = {},
+	TypeParent = DeleteUserPayload
+> {
+	id?: DeleteUserPayloadIdResolver<string, TypeParent, TContext>
+}
+
+export type DeleteUserPayloadIdResolver<
+	R = string,
+	Parent = DeleteUserPayload,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
 
 export interface LoginPayloadResolvers<
 	TContext = {},
@@ -251,6 +292,7 @@ export type IResolvers<TContext = {}> = {
 	Query?: QueryResolvers<TContext>
 	User?: UserResolvers<TContext>
 	Mutation?: MutationResolvers<TContext>
+	DeleteUserPayload?: DeleteUserPayloadResolvers<TContext>
 	LoginPayload?: LoginPayloadResolvers<TContext>
 	Upload?: GraphQLScalarType
 } & { [typeName: string]: never }

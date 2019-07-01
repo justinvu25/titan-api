@@ -7,6 +7,7 @@ const Query = gql`
 	}
 	type Mutation {
 		registerUser(input: RegisterUserInput!): User!
+		deleteUser: DeleteUserPayload!
 		login(input: LoginCredentials!): LoginPayload!
 	}
 `
