@@ -13,6 +13,7 @@ interface UserConnector {
 	getAllUsers: Function
 	createUser: Function
 	findUserByEmail: Function
+	deleteUser: Function
 }
 
 class User {

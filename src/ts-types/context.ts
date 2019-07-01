@@ -1,3 +1,5 @@
+import { Maybe } from '@/ts-types/generated'
+
 export interface Context {
 	models: {
 		User: {
@@ -6,5 +8,14 @@ export interface Context {
 			login: Function
 			deleteUser: Function
 		}
+	}
+	user: {
+		id: string
+	}
+}
+
+export interface RequestContext {
+	headers: {
+		authorization: Maybe<string>
 	}
 }

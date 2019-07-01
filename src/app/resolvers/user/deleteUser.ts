@@ -1,19 +1,19 @@
 import { Context } from '@/ts-types/context'
-import { DeleteUserMutationArgs, DeleteUserPayload } from '@/ts-types/generated'
+import { DeleteUserPayload } from '@/ts-types/generated'
 
 const deleteUser = async (
 	_parent: object,
-	args: DeleteUserMutationArgs,
+	_args: undefined,
 	context: Context,
 ): Promise<DeleteUserPayload> => {
 	const {
 		models: { User },
+		user,
 	} = context
 
-	const {
-		input: { id },
-	} = args
-	const { _id } = await User.deleteUser(id)
+	console.log(user)
+
+	const { _id } = await User.deleteUser(user.id)
 	return {
 		id: _id,
 	}

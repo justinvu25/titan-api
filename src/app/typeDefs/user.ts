@@ -26,8 +26,4 @@ export default gql`
 		email: String!
 		password: String!
 	}
-
-	input DeleteUserInput {
-		id: String!
-	}
 `

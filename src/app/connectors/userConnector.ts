@@ -21,6 +21,12 @@ class UserConnector {
 		const user = await User.findOne({ email })
 		return user
 	}
+
+	async deleteUser(userId: string): Promise<UserPayload> {
+		const user = await User.findByIdAndDelete(userId)
+		console.log('in connector', user)
+		return user
+	}
 }
 
 export default UserConnector
