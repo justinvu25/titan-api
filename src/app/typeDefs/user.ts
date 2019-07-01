@@ -7,8 +7,18 @@ export default gql`
 		email: String!
 	}
 
+	type LoginPayload {
+		accessToken: String!
+		expiresIn: String!
+	}
+
 	input RegisterUserInput {
 		name: String!
+		email: String!
+		password: String!
+	}
+
+	input LoginCredentials {
 		email: String!
 		password: String!
 	}

@@ -3,6 +3,7 @@ export interface Context {
 		User: {
 			registerUser: Function
 			getAllUsers: Function
+			login: Function
 		}
 	}
 }

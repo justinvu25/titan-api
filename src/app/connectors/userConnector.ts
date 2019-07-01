@@ -1,7 +1,14 @@
+import * as jwt from 'jsonwebtoken'
 import * as bcrypt from 'bcrypt'
+import { pick } from 'lodash'
 import User from '@/entities/user'
-import { UserInput, UserPayload } from '@/ts-types/user'
-import { SALT_ROUNDS } from '@/utils/constants'
+import {
+	UserInput,
+	UserPayload,
+	LoginCredentials,
+	LoginPayload,
+} from '@/ts-types/user'
+import { SALT_ROUNDS, JWT_EXPIRY } from '@/utils/constants'
 
 class UserConnector {
 	static async getAllUsers(): Promise<UserPayload[]> {
@@ -26,6 +33,32 @@ class UserConnector {
 			throw new Error('User could not be created.')
 		}
 		throw new Error('User already exists.')
+	}
+
+	static async login(
+		loginCredentials: LoginCredentials,
+	): Promise<LoginPayload> {
+		const { email, password } = loginCredentials
+		const user = await User.findOne({ email })
+
+		if (user) {
+			const hashedPassword = bcrypt.hashSync(password, SALT_ROUNDS)
+			if (bcrypt.compare(user.password, hashedPassword)) {
+				const token = jwt.sign(
+					{ user: pick(user, ['_id']) },
+					process.env.JWT_SECRET,
+					{
+						expiresIn: JWT_EXPIRY,
+					},
+				)
+				return {
+					accessToken: token,
+					expiresIn: JWT_EXPIRY,
+				}
+			}
+		}
+
+		throw new Error('Something went wrong.')
 	}
 }
 
