@@ -6,6 +6,9 @@ const Query = gql`
 		users: [User!]!
 		user: User!
 	}
+`
+
+const Mutation = gql`
 	type Mutation {
 		registerUser(input: RegisterUserInput!): User!
 		deleteUser: DeleteUserPayload!
@@ -13,6 +16,6 @@ const Query = gql`
 	}
 `
 
-const typeDefs = [Query, User]
+const typeDefs = [Query, Mutation, User]
 
 export default typeDefs
