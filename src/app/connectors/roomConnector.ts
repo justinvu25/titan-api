@@ -30,6 +30,11 @@ class RoomConnector {
 		const room = await Room.find()
 		return room
 	}
+
+	async deleteRoomByRoomId(roomId: string): Promise<RoomPayload> {
+		const room = await Room.findByIdAndDelete(roomId)
+		return room
+	}
 }
 
 export default RoomConnector

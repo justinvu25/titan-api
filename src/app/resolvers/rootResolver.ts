@@ -6,7 +6,13 @@ import {
 	deleteUser,
 	getUsersForRoom,
 } from './user'
-import { createRoom, getRoomForUser, addUserToRoom, getAllRooms } from './room'
+import {
+	createRoom,
+	getRoomForUser,
+	addUserToRoom,
+	getAllRooms,
+	deleteRoom,
+} from './room'
 
 const mutationResolvers = {
 	registerUser,
@@ -14,6 +20,7 @@ const mutationResolvers = {
 	login,
 	createRoom,
 	joinRoom: addUserToRoom,
+	deleteRoom,
 }
 
 const commonResolvers = {

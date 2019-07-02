@@ -15,6 +15,7 @@ export interface Context {
 			getRoomForUser: Function
 			addUserToRoom: Function
 			getAllRooms: Function
+			deleteRoomByRoomId: Function
 		}
 	}
 	user: {

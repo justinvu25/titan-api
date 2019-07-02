@@ -2,6 +2,7 @@ import { gql } from 'apollo-server-express'
 
 export default gql`
 	type Room {
+		_id: ID!
 		name: String!
 		userIds: [String!]!
 		pin: String!
@@ -10,11 +11,19 @@ export default gql`
 		users: [User!]!
 	}
 
+	type DeleteRoomMutationPayload {
+		id: String!
+	}
+
 	input CreateRoomMutationArgs {
 		name: String!
 	}
 
 	input JoinRoomMutationArgs {
 		pin: String!
+	}
+
+	input DeleteRoomMutationArgs {
+		roomId: String!
 	}
 `

@@ -22,6 +22,10 @@ export interface JoinRoomMutationArgs {
 	pin: string
 }
 
+export interface DeleteRoomMutationArgs {
+	roomId: string
+}
+
 export enum CacheControlScope {
 	Public = 'PUBLIC',
 	Private = 'PRIVATE',
@@ -44,6 +48,8 @@ export interface Query {
 	user: User
 
 	room?: Maybe<Room>
+
+	rooms: (Maybe<Room>)[]
 }
 
 export interface User {
@@ -55,6 +61,8 @@ export interface User {
 }
 
 export interface Room {
+	_id: string
+
 	name: string
 
 	userIds: string[]
@@ -78,6 +86,8 @@ export interface Mutation {
 	createRoom: Room
 
 	joinRoom: Room
+
+	deleteRoom: DeleteRoomMutationPayload
 }
 
 export interface DeleteUserPayload {
@@ -88,6 +98,10 @@ export interface LoginPayload {
 	accessToken: string
 
 	expiresIn: string
+}
+
+export interface DeleteRoomMutationPayload {
+	id: string
 }
 
 // ====================================================
@@ -105,6 +119,9 @@ export interface CreateRoomMutationArgs {
 }
 export interface JoinRoomMutationArgs {
 	input: JoinRoomMutationArgs
+}
+export interface DeleteRoomMutationArgs {
+	input: DeleteRoomMutationArgs
 }
 
 import {
@@ -168,6 +185,8 @@ export interface QueryResolvers<TContext = {}, TypeParent = {}> {
 	user?: QueryUserResolver<User, TypeParent, TContext>
 
 	room?: QueryRoomResolver<Maybe<Room>, TypeParent, TContext>
+
+	rooms?: QueryRoomsResolver<(Maybe<Room>)[], TypeParent, TContext>
 }
 
 export type QueryUsersResolver<
@@ -182,6 +201,11 @@ export type QueryUserResolver<R = User, Parent = {}, TContext = {}> = Resolver<
 >
 export type QueryRoomResolver<
 	R = Maybe<Room>,
+	Parent = {},
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type QueryRoomsResolver<
+	R = (Maybe<Room>)[],
 	Parent = {},
 	TContext = {}
 > = Resolver<R, Parent, TContext>
@@ -211,6 +235,8 @@ export type UserEmailResolver<
 > = Resolver<R, Parent, TContext>
 
 export interface RoomResolvers<TContext = {}, TypeParent = Room> {
+	_id?: Room_IdResolver<string, TypeParent, TContext>
+
 	name?: RoomNameResolver<string, TypeParent, TContext>
 
 	userIds?: RoomUserIdsResolver<string[], TypeParent, TContext>
@@ -232,6 +258,11 @@ export interface RoomResolvers<TContext = {}, TypeParent = Room> {
 	users?: RoomUsersResolver<User[], TypeParent, TContext>
 }
 
+export type Room_IdResolver<
+	R = string,
+	Parent = Room,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
 export type RoomNameResolver<
 	R = string,
 	Parent = Room,
@@ -277,6 +308,12 @@ export interface MutationResolvers<TContext = {}, TypeParent = {}> {
 	createRoom?: MutationCreateRoomResolver<Room, TypeParent, TContext>
 
 	joinRoom?: MutationJoinRoomResolver<Room, TypeParent, TContext>
+
+	deleteRoom?: MutationDeleteRoomResolver<
+		DeleteRoomMutationPayload,
+		TypeParent,
+		TContext
+	>
 }
 
 export type MutationRegisterUserResolver<
@@ -320,6 +357,15 @@ export interface MutationJoinRoomArgs {
 	input: JoinRoomMutationArgs
 }
 
+export type MutationDeleteRoomResolver<
+	R = DeleteRoomMutationPayload,
+	Parent = {},
+	TContext = {}
+> = Resolver<R, Parent, TContext, MutationDeleteRoomArgs>
+export interface MutationDeleteRoomArgs {
+	input: DeleteRoomMutationArgs
+}
+
 export interface DeleteUserPayloadResolvers<
 	TContext = {},
 	TypeParent = DeleteUserPayload
@@ -350,6 +396,19 @@ export type LoginPayloadAccessTokenResolver<
 export type LoginPayloadExpiresInResolver<
 	R = string,
 	Parent = LoginPayload,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+
+export interface DeleteRoomMutationPayloadResolvers<
+	TContext = {},
+	TypeParent = DeleteRoomMutationPayload
+> {
+	id?: DeleteRoomMutationPayloadIdResolver<string, TypeParent, TContext>
+}
+
+export type DeleteRoomMutationPayloadIdResolver<
+	R = string,
+	Parent = DeleteRoomMutationPayload,
 	TContext = {}
 > = Resolver<R, Parent, TContext>
 
@@ -409,6 +468,7 @@ export type IResolvers<TContext = {}> = {
 	Mutation?: MutationResolvers<TContext>
 	DeleteUserPayload?: DeleteUserPayloadResolvers<TContext>
 	LoginPayload?: LoginPayloadResolvers<TContext>
+	DeleteRoomMutationPayload?: DeleteRoomMutationPayloadResolvers<TContext>
 	Upload?: GraphQLScalarType
 } & { [typeName: string]: never }
 

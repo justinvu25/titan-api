@@ -18,6 +18,7 @@ const Mutation = gql`
 		login(input: LoginCredentials!): LoginPayload!
 		createRoom(input: CreateRoomMutationArgs!): Room!
 		joinRoom(input: JoinRoomMutationArgs!): Room!
+		deleteRoom(input: DeleteRoomMutationArgs!): DeleteRoomMutationPayload!
 	}
 `
 
