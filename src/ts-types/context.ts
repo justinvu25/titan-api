@@ -8,6 +8,14 @@ export interface Context {
 			login: Function
 			deleteUser: Function
 			getUser: Function
+			getUsersByRoom: Function
+		}
+		Room: {
+			createRoom: Function
+			getRoomForUser: Function
+			addUserToRoom: Function
+			getAllRooms: Function
+			deleteRoomByRoomId: Function
 		}
 	}
 	user: {
