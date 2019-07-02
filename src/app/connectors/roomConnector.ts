@@ -12,6 +12,11 @@ class RoomConnector {
 		})
 		return room
 	}
+
+	async getRoomByUserId(userId: string): Promise<RoomPayload> {
+		const room = await Room.findOne({ userIds: userId })
+		return room
+	}
 }
 
 export default RoomConnector

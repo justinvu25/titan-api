@@ -15,6 +15,7 @@ interface UserConnector {
 	findUserByEmail: Function
 	deleteUser: Function
 	findUserById: Function
+	findUsersByUserIds: Function
 }
 
 class User {
@@ -89,6 +90,11 @@ class User {
 			throw new Error(`Can't find user`)
 		}
 		return user
+	}
+
+	async getUsersByRoom(userIds: string[]): Promise<UserPayload[]> {
+		const users = await this.connector.findUsersByUserIds(userIds)
+		return users
 	}
 }
 

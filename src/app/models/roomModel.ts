@@ -2,6 +2,7 @@ import { RoomInput, RoomPayload } from '@/ts-types/room'
 
 interface RoomConnector {
 	createRoom: Function
+	getRoomByUserId: Function
 }
 
 class Room {
@@ -13,6 +14,11 @@ class Room {
 
 	async createRoom(roomInput: RoomInput): Promise<RoomPayload> {
 		const room = await this.connector.createRoom(roomInput)
+		return room
+	}
+
+	async getRoomForUser(userId: string): Promise<RoomPayload> {
+		const room = await this.connector.getRoomByUserId(userId)
 		return room
 	}
 }

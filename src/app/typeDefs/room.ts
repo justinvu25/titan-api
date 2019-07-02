@@ -7,6 +7,7 @@ export default gql`
 		pin: String!
 		sessionStarted: Boolean
 		votingCompleted: Boolean
+		users: [User!]!
 	}
 
 	input CreateRoomMutationArgs {

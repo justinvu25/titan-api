@@ -17,6 +17,17 @@ class UserConnector {
 		return users
 	}
 
+	async findUsersByUserIds(userIds: string[]): Promise<UserPayload[]> {
+		const users = await this.getAllUsers()
+
+		return users.filter(
+			(user): boolean => {
+				const { _id: userId } = user
+				return userIds.includes(userId.toString())
+			},
+		)
+	}
+
 	async findUserByEmail(email: string): Promise<UserPayload> {
 		const user = await User.findOne({ email })
 		return user

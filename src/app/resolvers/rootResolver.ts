@@ -1,5 +1,12 @@
-import { getUsers, getUser, registerUser, login, deleteUser } from './user'
-import { createRoom } from './room'
+import {
+	getUsers,
+	getUser,
+	registerUser,
+	login,
+	deleteUser,
+	getUsersForRoom,
+} from './user'
+import { createRoom, getRoomForUser } from './room'
 
 const mutationResolvers = {
 	registerUser,
@@ -9,9 +16,13 @@ const mutationResolvers = {
 }
 
 const resolver = {
+	Room: {
+		users: getUsersForRoom,
+	},
 	Query: {
 		users: getUsers,
 		user: getUser,
+		room: getRoomForUser,
 	},
 	Mutation: mutationResolvers,
 }
