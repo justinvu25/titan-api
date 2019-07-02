@@ -13,6 +13,7 @@ export interface Context {
 		Room: {
 			createRoom: Function
 			getRoomForUser: Function
+			addUserToRoom: Function
 		}
 	}
 	user: {

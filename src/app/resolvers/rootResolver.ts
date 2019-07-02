@@ -6,19 +6,24 @@ import {
 	deleteUser,
 	getUsersForRoom,
 } from './user'
-import { createRoom, getRoomForUser } from './room'
+import { createRoom, getRoomForUser, addUserToRoom } from './room'
 
 const mutationResolvers = {
 	registerUser,
 	deleteUser,
 	login,
 	createRoom,
+	joinRoom: addUserToRoom,
 }
 
-const resolver = {
+const commonResolvers = {
 	Room: {
 		users: getUsersForRoom,
 	},
+}
+
+const resolver = {
+	...commonResolvers,
 	Query: {
 		users: getUsers,
 		user: getUser,

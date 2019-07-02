@@ -17,6 +17,14 @@ class RoomConnector {
 		const room = await Room.findOne({ userIds: userId })
 		return room
 	}
+
+	async addUserToRoom(pin: string, userId: string): Promise<RoomPayload> {
+		const room = await Room.findOneAndUpdate(
+			{ pin },
+			{ $push: { userIds: userId } },
+		)
+		return room
+	}
 }
 
 export default RoomConnector

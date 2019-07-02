@@ -13,4 +13,8 @@ export default gql`
 	input CreateRoomMutationArgs {
 		name: String!
 	}
+
+	input JoinRoomMutationArgs {
+		pin: String!
+	}
 `
