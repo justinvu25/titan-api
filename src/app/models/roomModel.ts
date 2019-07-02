@@ -4,6 +4,7 @@ interface RoomConnector {
 	createRoom: Function
 	getRoomByUserId: Function
 	addUserToRoom: Function
+	getAllRooms: Function
 }
 
 class Room {
@@ -25,6 +26,11 @@ class Room {
 
 	async addUserToRoom(pin: string, userId: string): Promise<RoomPayload> {
 		const room = await this.connector.addUserToRoom(pin, userId)
+		return room
+	}
+
+	async getAllRooms(): Promise<RoomPayload[]> {
+		const room = await this.connector.getAllRooms()
 		return room
 	}
 }

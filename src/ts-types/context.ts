@@ -14,6 +14,7 @@ export interface Context {
 			createRoom: Function
 			getRoomForUser: Function
 			addUserToRoom: Function
+			getAllRooms: Function
 		}
 	}
 	user: {

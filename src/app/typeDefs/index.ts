@@ -7,6 +7,7 @@ const Query = gql`
 		users: [User!]!
 		user: User!
 		room: Room
+		rooms: [Room]!
 	}
 `
 

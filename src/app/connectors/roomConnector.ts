@@ -25,6 +25,11 @@ class RoomConnector {
 		)
 		return room
 	}
+
+	async getAllRooms(): Promise<RoomPayload[]> {
+		const room = await Room.find()
+		return room
+	}
 }
 
 export default RoomConnector

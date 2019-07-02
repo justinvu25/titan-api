@@ -6,7 +6,7 @@ import {
 	deleteUser,
 	getUsersForRoom,
 } from './user'
-import { createRoom, getRoomForUser, addUserToRoom } from './room'
+import { createRoom, getRoomForUser, addUserToRoom, getAllRooms } from './room'
 
 const mutationResolvers = {
 	registerUser,
@@ -28,6 +28,7 @@ const resolver = {
 		users: getUsers,
 		user: getUser,
 		room: getRoomForUser,
+		rooms: getAllRooms,
 	},
 	Mutation: mutationResolvers,
 }
