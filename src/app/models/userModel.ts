@@ -1,6 +1,7 @@
 import * as bcrypt from 'bcrypt'
 import * as jwt from 'jsonwebtoken'
 import { pick } from 'lodash'
+import { InvalidLoginError, UserDoesNotExistError } from '@/errors/authErrors'
 import {
 	UserInput,
 	LoginCredentials,
@@ -51,7 +52,7 @@ class User {
 		const user = await this.connector.deleteUser(userId)
 
 		if (!user) {
-			throw new Error('User does not exist')
+			throw UserDoesNotExistError()
 		}
 		return user
 	}
@@ -60,14 +61,15 @@ class User {
 		const user = await this.connector.findUserByEmail(loginCredentials.email)
 
 		if (!user) {
-			throw new Error('This user does not exist.')
+			throw new UserDoesNotExistError()
 		}
 
-		const hashedPassword = bcrypt.hashSync(
+		const passwordMatch = await bcrypt.compare(
 			loginCredentials.password,
-			SALT_ROUNDS,
+			user.password,
 		)
-		if (bcrypt.compare(user.password, hashedPassword)) {
+
+		if (passwordMatch) {
 			const token = jwt.sign(
 				{ user: pick(user, ['_id']) },
 				process.env.JWT_SECRET,
@@ -80,7 +82,7 @@ class User {
 				expiresIn: JWT_EXPIRY,
 			}
 		}
-		throw new Error('Email or password is incorrect.')
+		throw new InvalidLoginError()
 	}
 
 	async getUser(id: string): Promise<UserPayload> {
