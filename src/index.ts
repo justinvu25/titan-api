@@ -25,7 +25,7 @@ server.applyMiddleware({ app, path: '/graphql' })
 const httpServer = createServer(app)
 
 httpServer.listen(
-	{ port: 3000 },
+	{ port: process.env.PORT || 3000 },
 	(): void =>
 		// eslint-disable-next-line
 		console.log(`🚀 GraphQL is now running on http://localhost:3000/graphql`),
