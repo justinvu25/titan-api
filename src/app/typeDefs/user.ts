@@ -5,6 +5,7 @@ export default gql`
 		_id: ID!
 		name: String!
 		email: String!
+		room: Room
 	}
 
 	type LoginPayload {

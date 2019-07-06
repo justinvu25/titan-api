@@ -8,7 +8,7 @@ export default gql`
 		pin: String!
 		sessionStarted: Boolean
 		votingCompleted: Boolean
-		users: [User!]!
+		party: [User!]!
 	}
 
 	type DeleteRoomMutationPayload {

@@ -25,7 +25,10 @@ const mutationResolvers = {
 
 const commonResolvers = {
 	Room: {
-		users: getUsersForRoom,
+		party: getUsersForRoom,
+	},
+	User: {
+		room: getRoomForUser,
 	},
 }
 
@@ -34,7 +37,6 @@ const resolver = {
 	Query: {
 		users: getUsers,
 		user: getUser,
-		room: getRoomForUser,
 		rooms: getAllRooms,
 	},
 	Mutation: mutationResolvers,
