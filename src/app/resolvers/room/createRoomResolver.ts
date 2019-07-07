@@ -8,7 +8,7 @@ const createRoom = async (
 ): Promise<RoomType> => {
 	const {
 		models: { Room },
-		user,
+		user: { id },
 	} = context
 
 	const {
@@ -17,8 +17,9 @@ const createRoom = async (
 
 	const room = await Room.createRoom({
 		name,
-		userId: user.id,
+		userId: id,
 	})
+
 	return room
 }
 

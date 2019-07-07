@@ -8,6 +8,12 @@ export interface RegisterUserInput {
 	password: string
 }
 
+export interface UpdateUserInput {
+	name?: Maybe<string>
+
+	email?: Maybe<string>
+}
+
 export interface LoginCredentials {
 	email: string
 
@@ -58,6 +64,8 @@ export interface User {
 	name: string
 
 	email: string
+
+	room?: Maybe<Room>
 }
 
 export interface Room {
@@ -73,13 +81,17 @@ export interface Room {
 
 	votingCompleted?: Maybe<boolean>
 
-	users: User[]
+	roomOwner: User
+
+	party: User[]
 }
 
 export interface Mutation {
 	registerUser: User
 
 	deleteUser: DeleteUserPayload
+
+	updateUser: User
 
 	login: LoginPayload
 
@@ -110,6 +122,9 @@ export interface DeleteRoomMutationPayload {
 
 export interface RegisterUserMutationArgs {
 	input: RegisterUserInput
+}
+export interface UpdateUserMutationArgs {
+	input: UpdateUserInput
 }
 export interface LoginMutationArgs {
 	input: LoginCredentials
@@ -216,6 +231,8 @@ export interface UserResolvers<TContext = {}, TypeParent = User> {
 	name?: UserNameResolver<string, TypeParent, TContext>
 
 	email?: UserEmailResolver<string, TypeParent, TContext>
+
+	room?: UserRoomResolver<Maybe<Room>, TypeParent, TContext>
 }
 
 export type User_IdResolver<
@@ -230,6 +247,11 @@ export type UserNameResolver<
 > = Resolver<R, Parent, TContext>
 export type UserEmailResolver<
 	R = string,
+	Parent = User,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type UserRoomResolver<
+	R = Maybe<Room>,
 	Parent = User,
 	TContext = {}
 > = Resolver<R, Parent, TContext>
@@ -255,7 +277,9 @@ export interface RoomResolvers<TContext = {}, TypeParent = Room> {
 		TContext
 	>
 
-	users?: RoomUsersResolver<User[], TypeParent, TContext>
+	roomOwner?: RoomRoomOwnerResolver<User, TypeParent, TContext>
+
+	party?: RoomPartyResolver<User[], TypeParent, TContext>
 }
 
 export type Room_IdResolver<
@@ -288,7 +312,12 @@ export type RoomVotingCompletedResolver<
 	Parent = Room,
 	TContext = {}
 > = Resolver<R, Parent, TContext>
-export type RoomUsersResolver<
+export type RoomRoomOwnerResolver<
+	R = User,
+	Parent = Room,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type RoomPartyResolver<
 	R = User[],
 	Parent = Room,
 	TContext = {}
@@ -302,6 +331,8 @@ export interface MutationResolvers<TContext = {}, TypeParent = {}> {
 		TypeParent,
 		TContext
 	>
+
+	updateUser?: MutationUpdateUserResolver<User, TypeParent, TContext>
 
 	login?: MutationLoginResolver<LoginPayload, TypeParent, TContext>
 
@@ -330,6 +361,15 @@ export type MutationDeleteUserResolver<
 	Parent = {},
 	TContext = {}
 > = Resolver<R, Parent, TContext>
+export type MutationUpdateUserResolver<
+	R = User,
+	Parent = {},
+	TContext = {}
+> = Resolver<R, Parent, TContext, MutationUpdateUserArgs>
+export interface MutationUpdateUserArgs {
+	input: UpdateUserInput
+}
+
 export type MutationLoginResolver<
 	R = LoginPayload,
 	Parent = {},

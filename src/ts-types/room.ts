@@ -9,4 +9,5 @@ export interface RoomPayload {
 	pin: string
 	sessionStarted: boolean
 	votingCompleted: boolean
+	roomOwner: string
 }

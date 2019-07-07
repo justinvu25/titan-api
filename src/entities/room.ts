@@ -15,6 +15,9 @@ class Room extends Typegoose {
 
 	@prop({ default: false })
 	votingCompleted: boolean
+
+	@prop({ required: true })
+	roomOwner: string
 }
 
 export default new Room().getModelForClass(Room, {

@@ -4,6 +4,11 @@ export interface UserInput {
 	password: string
 }
 
+export interface UpdateUserInput {
+	name?: string
+	email?: string
+}
+
 export interface UserPayload {
 	_id: string
 	name: string

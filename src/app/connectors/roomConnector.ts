@@ -9,6 +9,7 @@ class RoomConnector {
 			name,
 			userIds: [userId],
 			pin: pinGenerator(),
+			roomOwner: userId,
 		})
 		return room
 	}

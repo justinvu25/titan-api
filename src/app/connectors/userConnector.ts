@@ -38,6 +38,11 @@ class UserConnector {
 		return user
 	}
 
+	async findUserByIdAndUpdate(id: string, update: any): Promise<UserPayload> {
+		const user = await User.findByIdAndUpdate(id, { ...update })
+		return user
+	}
+
 	async deleteUser(userId: string): Promise<UserPayload> {
 		const user = await User.findByIdAndDelete(userId)
 		return user

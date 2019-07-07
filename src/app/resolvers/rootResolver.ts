@@ -1,24 +1,27 @@
 import {
 	getUsers,
 	getUser,
+	updateUserResolver,
 	registerUser,
 	login,
 	deleteUser,
 	getUsersForRoom,
 } from './user'
 import {
-	createRoom,
+	createRoomResolver,
 	getRoomForUser,
 	addUserToRoom,
 	getAllRooms,
 	deleteRoom,
+	roomOwnerResolver,
 } from './room'
 
 const mutationResolvers = {
 	registerUser,
+	updateUser: updateUserResolver,
 	deleteUser,
 	login,
-	createRoom,
+	createRoom: createRoomResolver,
 	joinRoom: addUserToRoom,
 	deleteRoom,
 }
@@ -26,6 +29,7 @@ const mutationResolvers = {
 const commonResolvers = {
 	Room: {
 		party: getUsersForRoom,
+		roomOwner: roomOwnerResolver,
 	},
 	User: {
 		room: getRoomForUser,

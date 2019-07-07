@@ -7,6 +7,7 @@ import {
 	LoginCredentials,
 	LoginPayload,
 	UserPayload,
+	UpdateUserInput,
 } from '@/ts-types/user'
 import { SALT_ROUNDS, JWT_EXPIRY } from '@/utils/constants'
 
@@ -17,6 +18,7 @@ interface UserConnector {
 	deleteUser: Function
 	findUserById: Function
 	findUsersByUserIds: Function
+	findUserByIdAndUpdate: Function
 }
 
 class User {
@@ -52,7 +54,7 @@ class User {
 		const user = await this.connector.deleteUser(userId)
 
 		if (!user) {
-			throw UserDoesNotExistError()
+			throw new UserDoesNotExistError()
 		}
 		return user
 	}
@@ -89,7 +91,16 @@ class User {
 		const user = await this.connector.findUserById(id)
 
 		if (!user) {
-			throw new Error(`Can't find user`)
+			throw new UserDoesNotExistError()
+		}
+		return user
+	}
+
+	async updateUser(id: string, update: UpdateUserInput): Promise<UserPayload> {
+		const user = await this.connector.findUserByIdAndUpdate(id, update)
+
+		if (!user) {
+			throw new UserDoesNotExistError()
 		}
 		return user
 	}

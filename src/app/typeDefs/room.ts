@@ -8,6 +8,7 @@ export default gql`
 		pin: String!
 		sessionStarted: Boolean
 		votingCompleted: Boolean
+		roomOwner: User!
 		party: [User!]!
 	}
 

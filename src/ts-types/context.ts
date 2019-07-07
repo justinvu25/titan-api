@@ -9,6 +9,7 @@ export interface Context {
 			deleteUser: Function
 			getUser: Function
 			getUsersByRoom: Function
+			updateUser: Function
 		}
 		Room: {
 			createRoom: Function
