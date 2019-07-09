@@ -9,11 +9,14 @@ const updateUserResolver = async (
 	const {
 		models: { User },
 		user: { id },
+		pubsub,
 	} = context
 
 	const { input } = args
 
 	const user = await User.updateUser(id, input)
+
+	pubsub.publish('USER_UPDATED')
 	return user
 }
 

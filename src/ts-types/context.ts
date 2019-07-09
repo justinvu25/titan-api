@@ -22,10 +22,12 @@ export interface Context {
 	user: {
 		id: string
 	}
+	pubsub: any
 }
 
 export interface RequestContext {
 	headers: {
 		authorization: Maybe<string>
+		connection: any
 	}
 }
