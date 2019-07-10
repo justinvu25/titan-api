@@ -21,6 +21,10 @@ const Mutation = gql`
 		joinRoom(input: JoinRoomMutationArgs!): Room!
 		deleteRoom(input: DeleteRoomMutationArgs!): DeleteRoomMutationPayload!
 	}
+
+	type Subscription {
+		userUpdated: User!
+	}
 `
 
 const typeDefs = [Query, Mutation, User, Room]

@@ -6,6 +6,7 @@ import {
 	login,
 	deleteUser,
 	getUsersForRoom,
+	userUpdatedSubscription,
 } from './user'
 import {
 	createRoomResolver,
@@ -44,6 +45,12 @@ const resolver = {
 		rooms: getAllRooms,
 	},
 	Mutation: mutationResolvers,
+	Subscription: {
+		userUpdated: {
+			subscribe: userUpdatedSubscription,
+			resolve: getUser,
+		},
+	},
 }
 
 export default resolver

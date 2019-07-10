@@ -1,4 +1,5 @@
 import { Maybe } from '@/ts-types/generated'
+import { Pubsub } from '@/ts-types/pubsub'
 
 export interface Context {
 	models: {
@@ -22,10 +23,17 @@ export interface Context {
 	user: {
 		id: string
 	}
+	pubsub: Pubsub
 }
 
 export interface RequestContext {
 	headers: {
+		authorization: Maybe<string>
+	}
+}
+
+export interface ConnectionContext {
+	context: {
 		authorization: Maybe<string>
 	}
 }

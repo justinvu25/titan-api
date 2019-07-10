@@ -3,17 +3,26 @@ import UserConnector from './connectors/userConnector'
 import RoomModel from './models/roomModel'
 import RoomConnector from './connectors/roomConnector'
 
+import pubsub from '@/pubsub/pubsub'
+
 import { decodeJwt } from '@/utils/jwtHelpers'
-import { RequestContext } from '@/ts-types/context'
+import { Pubsub } from '@/ts-types/pubsub'
+import { RequestContext, ConnectionContext } from '@/ts-types/context'
 import { Maybe } from '@/ts-types/generated'
 
-export default ({
+interface ContextReturnPayload {
+	models: object
+	user?: Maybe<object>
+	pubsub: Pubsub
+}
+
+const context = async ({
 	req,
+	connection,
 }: {
 	req: RequestContext
-}): { models: object; user?: Maybe<object> } => {
-	const user = decodeJwt(req.headers)
-
+	connection: ConnectionContext
+}): Promise<ContextReturnPayload> => {
 	const userConnector = new UserConnector()
 	const roomConnector = new RoomConnector()
 
@@ -25,14 +34,23 @@ export default ({
 			connector: roomConnector,
 		}),
 	}
-	if (user) {
+
+	if (connection) {
 		return {
 			models,
-			user,
+			pubsub,
+			user: decodeJwt(connection.context.authorization),
+			...connection.context,
 		}
 	}
 
+	const user = decodeJwt(req.headers.authorization)
+	const userData = user ? { user } : {}
 	return {
 		models,
+		pubsub,
+		...userData,
 	}
 }
+
+export default context

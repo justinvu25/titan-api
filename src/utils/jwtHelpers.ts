@@ -11,18 +11,12 @@ interface DecodedJwt {
 	id: string
 }
 
-interface RequestHeaders {
-	authorization?: string
-}
-
-export const decodeJwt = (reqHeaders: RequestHeaders): Maybe<DecodedJwt> => {
-	const { authorization } = reqHeaders
-
-	if (!authorization) {
+export const decodeJwt = (authToken: string): Maybe<DecodedJwt> => {
+	if (!authToken) {
 		return null
 	}
 
-	const decodedToken = jwt.verify(authorization, process.env.JWT_SECRET, {
+	const decodedToken = jwt.verify(authToken, process.env.JWT_SECRET, {
 		algorithms: ['HS256'],
 	}) as DecodeJwtPayload
 

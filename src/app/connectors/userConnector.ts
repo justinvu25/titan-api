@@ -1,5 +1,5 @@
 import User from '@/entities/user'
-import { UserInput, UserPayload } from '@/ts-types/user'
+import { UserInput, UserPayload, UpdateUserInput } from '@/ts-types/user'
 
 class UserConnector {
 	async createUser(userData: UserInput): Promise<UserPayload> {
@@ -38,7 +38,10 @@ class UserConnector {
 		return user
 	}
 
-	async findUserByIdAndUpdate(id: string, update: any): Promise<UserPayload> {
+	async findUserByIdAndUpdate(
+		id: string,
+		update: UpdateUserInput,
+	): Promise<UserPayload> {
 		const user = await User.findByIdAndUpdate(id, { ...update })
 		return user
 	}
