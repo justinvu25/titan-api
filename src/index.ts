@@ -19,7 +19,7 @@ const graphqlServer = new ApolloServer({
 	resolvers,
 	context,
 	subscriptions: {
-		onConnect: async (connectionParams): Promise<object> => {
+		onConnect: (connectionParams): object => {
 			return connectionParams
 		},
 	},

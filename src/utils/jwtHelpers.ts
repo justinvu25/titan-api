@@ -11,11 +11,7 @@ interface DecodedJwt {
 	id: string
 }
 
-interface RequestHeaders {
-	authorization?: string
-}
-
-export const decodeJwt = (authToken: any): Maybe<DecodedJwt> => {
+export const decodeJwt = (authToken: string): Maybe<DecodedJwt> => {
 	if (!authToken) {
 		return null
 	}

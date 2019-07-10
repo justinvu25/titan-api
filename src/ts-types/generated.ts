@@ -116,6 +116,10 @@ export interface DeleteRoomMutationPayload {
 	id: string
 }
 
+export interface Subscription {
+	userUpdated: User
+}
+
 // ====================================================
 // Arguments
 // ====================================================
@@ -452,6 +456,16 @@ export type DeleteRoomMutationPayloadIdResolver<
 	TContext = {}
 > = Resolver<R, Parent, TContext>
 
+export interface SubscriptionResolvers<TContext = {}, TypeParent = {}> {
+	userUpdated?: SubscriptionUserUpdatedResolver<User, TypeParent, TContext>
+}
+
+export type SubscriptionUserUpdatedResolver<
+	R = User,
+	Parent = {},
+	TContext = {}
+> = SubscriptionResolver<R, Parent, TContext>
+
 export type CacheControlDirectiveResolver<Result> = DirectiveResolverFn<
 	Result,
 	CacheControlDirectiveArgs,
@@ -509,6 +523,7 @@ export type IResolvers<TContext = {}> = {
 	DeleteUserPayload?: DeleteUserPayloadResolvers<TContext>
 	LoginPayload?: LoginPayloadResolvers<TContext>
 	DeleteRoomMutationPayload?: DeleteRoomMutationPayloadResolvers<TContext>
+	Subscription?: SubscriptionResolvers<TContext>
 	Upload?: GraphQLScalarType
 } & { [typeName: string]: never }
 
