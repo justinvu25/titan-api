@@ -12,7 +12,7 @@ import './db/mongoose'
 
 const app = express()
 
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
 const graphqlServer = new ApolloServer({
 	typeDefs,
@@ -23,6 +23,8 @@ const graphqlServer = new ApolloServer({
 			return connectionParams
 		},
 	},
+	introspection: true,
+	playground: true,
 })
 
 app.use('*', cors())

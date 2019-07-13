@@ -13,7 +13,8 @@ const typeDefs_1 = __importDefault(require("./app/typeDefs"));
 const rootResolver_1 = __importDefault(require("./app/resolvers/rootResolver"));
 require("./db/mongoose");
 const app = express_1.default();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+console.log('port LOG', PORT);
 const graphqlServer = new apollo_server_express_1.ApolloServer({
     typeDefs: typeDefs_1.default,
     resolvers: rootResolver_1.default,
@@ -23,6 +24,9 @@ const graphqlServer = new apollo_server_express_1.ApolloServer({
             return connectionParams;
         },
     },
+});
+app.get('/', function (_, res) {
+    res.redirect('/graphql');
 });
 app.use('*', cors_1.default());
 app.use(compression_1.default());
