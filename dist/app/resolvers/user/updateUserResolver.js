@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const topics_1 = require("@/pubsub/topics");
+const topics_1 = require("../../../pubsub/topics");
 const updateUserResolver = async (_parent, args, context) => {
     const { models: { User }, user: { id }, pubsub, } = context;
     const { input } = args;

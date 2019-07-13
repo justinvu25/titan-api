@@ -1,5 +1,8 @@
-import { Context } from '@/ts-types/context'
-import { Room as RoomPayload, JoinRoomMutationArgs } from '@/ts-types/generated'
+import { Context } from '../../../ts-types/context'
+import {
+	Room as RoomPayload,
+	JoinRoomMutationArgs,
+} from '../../../ts-types/generated'
 
 const addUserToRoom = async (
 	_parent: object,

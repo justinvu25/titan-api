@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken'
-import { Maybe } from '@/ts-types/generated'
+import { Maybe } from '../ts-types/generated'
 
 interface DecodeJwtPayload {
 	user: {

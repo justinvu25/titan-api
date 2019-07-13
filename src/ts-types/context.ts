@@ -1,5 +1,5 @@
-import { Maybe } from '@/ts-types/generated'
-import { Pubsub } from '@/ts-types/pubsub'
+import { Maybe } from './generated'
+import { Pubsub } from './pubsub'
 
 export interface Context {
 	models: {

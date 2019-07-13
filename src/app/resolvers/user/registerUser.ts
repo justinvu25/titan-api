@@ -1,8 +1,8 @@
 import {
 	RegisterUserMutationArgs,
 	User as UserType,
-} from '@/ts-types/generated'
-import { Context } from '@/ts-types/context'
+} from '../../../ts-types/generated'
+import { Context } from '../../../ts-types/context'
 
 const registerUser = async (
 	_parent: object,

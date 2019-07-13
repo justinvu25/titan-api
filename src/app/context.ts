@@ -3,12 +3,12 @@ import UserConnector from './connectors/userConnector'
 import RoomModel from './models/roomModel'
 import RoomConnector from './connectors/roomConnector'
 
-import pubsub from '@/pubsub/pubsub'
+import pubsub from '../pubsub/pubsub'
 
-import { decodeJwt } from '@/utils/jwtHelpers'
-import { Pubsub } from '@/ts-types/pubsub'
-import { RequestContext, ConnectionContext } from '@/ts-types/context'
-import { Maybe } from '@/ts-types/generated'
+import { decodeJwt } from '../utils/jwtHelpers'
+import { Pubsub } from '../ts-types/pubsub'
+import { RequestContext, ConnectionContext } from '../ts-types/context'
+import { Maybe } from '../ts-types/generated'
 
 interface ContextReturnPayload {
 	models: object

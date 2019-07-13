@@ -1,5 +1,5 @@
-import { Room as RoomType } from '@/ts-types/generated'
-import { Context } from '@/ts-types/context'
+import { Room as RoomType } from '../../../ts-types/generated'
+import { Context } from '../../../ts-types/context'
 
 const getRoomForUser = async (
 	_parent: object,

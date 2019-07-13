@@ -2,7 +2,10 @@
 	"name": "finder-api",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "dist/index.js",
+	"engines": {
+		"node": ">=10.13.0"
+	},
 	"scripts": {
 		"start": "node -r ./tsconfig-paths-bootstrap.js dist/index.js",
 		"lint": "eslint \"src/**/*.ts\"",

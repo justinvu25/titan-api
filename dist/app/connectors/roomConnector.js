@@ -3,8 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const room_1 = __importDefault(require("@/entities/room"));
-const pinGenerator_1 = __importDefault(require("@/utils/pinGenerator"));
+const room_1 = __importDefault(require("../../entities/room"));
+const pinGenerator_1 = __importDefault(require("../../utils/pinGenerator"));
 class RoomConnector {
     async createRoom(roomInput) {
         const { name, userId } = roomInput;

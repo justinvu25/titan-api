@@ -7,8 +7,8 @@ const userModel_1 = __importDefault(require("./models/userModel"));
 const userConnector_1 = __importDefault(require("./connectors/userConnector"));
 const roomModel_1 = __importDefault(require("./models/roomModel"));
 const roomConnector_1 = __importDefault(require("./connectors/roomConnector"));
-const pubsub_1 = __importDefault(require("@/pubsub/pubsub"));
-const jwtHelpers_1 = require("@/utils/jwtHelpers");
+const pubsub_1 = __importDefault(require("../pubsub/pubsub"));
+const jwtHelpers_1 = require("../utils/jwtHelpers");
 const context = async ({ req, connection, }) => {
     const userConnector = new userConnector_1.default();
     const roomConnector = new roomConnector_1.default();

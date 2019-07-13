@@ -10,8 +10,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const bcrypt = __importStar(require("bcrypt"));
 const jwt = __importStar(require("jsonwebtoken"));
 const lodash_1 = require("lodash");
-const authErrors_1 = require("@/errors/authErrors");
-const constants_1 = require("@/utils/constants");
+const authErrors_1 = require("../../errors/authErrors");
+const constants_1 = require("../../utils/constants");
 class User {
     constructor({ connector }) {
         this.connector = connector;

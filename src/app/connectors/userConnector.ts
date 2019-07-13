@@ -1,5 +1,5 @@
-import User from '@/entities/user'
-import { UserInput, UserPayload, UpdateUserInput } from '@/ts-types/user'
+import User from '../../entities/user'
+import { UserInput, UserPayload, UpdateUserInput } from '../../ts-types/user'
 
 class UserConnector {
 	async createUser(userData: UserInput): Promise<UserPayload> {

@@ -1,8 +1,8 @@
-import { Context } from '@/ts-types/context'
+import { Context } from '../../../ts-types/context'
 import {
 	DeleteRoomMutationArgs,
 	DeleteRoomMutationPayload,
-} from '@/ts-types/generated'
+} from '../../../ts-types/generated'
 
 const deleteRoom = async (
 	_parent: object,
