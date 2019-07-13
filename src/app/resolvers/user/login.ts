@@ -1,5 +1,5 @@
-import { LoginMutationArgs, LoginPayload } from '@/ts-types/generated'
-import { Context } from '@/ts-types/context'
+import { LoginMutationArgs, LoginPayload } from '../../../ts-types/generated'
+import { Context } from '../../../ts-types/context'
 
 const login = async (
 	_parent: object,

@@ -1,5 +1,5 @@
-import { Context } from '@/ts-types/context'
-import { User as UserType, Room } from '@/ts-types/generated'
+import { Context } from '../../../ts-types/context'
+import { User as UserType, Room } from '../../../ts-types/generated'
 
 const roomOwnerResolver = async (
 	parent: Room,

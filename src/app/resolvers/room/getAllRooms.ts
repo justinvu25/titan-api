@@ -1,5 +1,5 @@
-import { Context } from '@/ts-types/context'
-import { Room as RoomPayload } from '@/ts-types/generated'
+import { Context } from '../../../ts-types/context'
+import { Room as RoomPayload } from '../../../ts-types/generated'
 
 const getAllRooms = async (
 	_parent: object,

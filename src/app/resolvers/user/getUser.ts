@@ -1,5 +1,5 @@
-import { Context } from '@/ts-types/context'
-import { UserPayload } from '@/ts-types/user'
+import { Context } from '../../../ts-types/context'
+import { UserPayload } from '../../../ts-types/user'
 
 const getUser = async (
 	_parent: object,

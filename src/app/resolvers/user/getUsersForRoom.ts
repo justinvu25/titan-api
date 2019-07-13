@@ -1,5 +1,5 @@
-import { User as UserPayload, Room } from '@/ts-types/generated'
-import { Context } from '@/ts-types/context'
+import { User as UserPayload, Room } from '../../../ts-types/generated'
+import { Context } from '../../../ts-types/context'
 
 const getUsersForRoom = async (
 	parent: Room,

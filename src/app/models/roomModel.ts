@@ -1,4 +1,4 @@
-import { RoomInput, RoomPayload } from '@/ts-types/room'
+import { RoomInput, RoomPayload } from '../../ts-types/room'
 
 interface RoomConnector {
 	createRoom: Function

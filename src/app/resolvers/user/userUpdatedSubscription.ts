@@ -1,5 +1,5 @@
-import { USER_UPDATED } from '@/pubsub/topics'
-import { Context } from '@/ts-types/context'
+import { USER_UPDATED } from '../../../pubsub/topics'
+import { Context } from '../../../ts-types/context'
 
 const userUpdatedSubscription = (
 	_parent: object,

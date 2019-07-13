@@ -1,6 +1,6 @@
-import Room from '@/entities/room'
-import { RoomInput, RoomPayload } from '@/ts-types/room'
-import pinGenerator from '@/utils/pinGenerator'
+import Room from '../../entities/room'
+import { RoomInput, RoomPayload } from '../../ts-types/room'
+import pinGenerator from '../../utils/pinGenerator'
 
 class RoomConnector {
 	async createRoom(roomInput: RoomInput): Promise<RoomPayload> {

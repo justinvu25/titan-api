@@ -1,6 +1,9 @@
-import { USER_UPDATED } from '@/pubsub/topics'
-import { Context } from '@/ts-types/context'
-import { User as UserType, UpdateUserMutationArgs } from '@/ts-types/generated'
+import { USER_UPDATED } from '../../../pubsub/topics'
+import { Context } from '../../../ts-types/context'
+import {
+	User as UserType,
+	UpdateUserMutationArgs,
+} from '../../../ts-types/generated'
 
 const updateUserResolver = async (
 	_parent: object,

@@ -1,5 +1,5 @@
-import { Context } from '@/ts-types/context'
-import { DeleteUserPayload } from '@/ts-types/generated'
+import { Context } from '../../../ts-types/context'
+import { DeleteUserPayload } from '../../../ts-types/generated'
 
 const deleteUser = async (
 	_parent: object,

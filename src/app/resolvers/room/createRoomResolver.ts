@@ -1,5 +1,8 @@
-import { CreateRoomMutationArgs, Room as RoomType } from '@/ts-types/generated'
-import { Context } from '@/ts-types/context'
+import {
+	CreateRoomMutationArgs,
+	Room as RoomType,
+} from '../../../ts-types/generated'
+import { Context } from '../../../ts-types/context'
 
 const createRoom = async (
 	_parent: object,

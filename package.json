@@ -2,12 +2,16 @@
 	"name": "finder-api",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "dist/index.js",
+	"engines": {
+		"node": ">=10.13.0"
+	},
 	"scripts": {
-		"start": "ts-node-dev -r tsconfig-paths/register src/index.ts",
+		"start": "node -r ./tsconfig-paths-bootstrap.js dist/index.js",
 		"lint": "eslint \"src/**/*.ts\"",
 		"format": "prettier --write \"**/*.{ts,js,json,md,yaml,yml}\"",
-		"generate-types": "gql-gen --config codegen.yml"
+		"generate-types": "gql-gen --config codegen.yml",
+		"build": "tsc -p ./tsconfig.build.json"
 	},
 	"repository": {
 		"type": "git",

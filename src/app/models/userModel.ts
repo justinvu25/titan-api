@@ -1,15 +1,18 @@
 import * as bcrypt from 'bcrypt'
 import * as jwt from 'jsonwebtoken'
 import { pick } from 'lodash'
-import { InvalidLoginError, UserDoesNotExistError } from '@/errors/authErrors'
+import {
+	InvalidLoginError,
+	UserDoesNotExistError,
+} from '../../errors/authErrors'
 import {
 	UserInput,
 	LoginCredentials,
 	LoginPayload,
 	UserPayload,
 	UpdateUserInput,
-} from '@/ts-types/user'
-import { SALT_ROUNDS, JWT_EXPIRY } from '@/utils/constants'
+} from '../../ts-types/user'
+import { SALT_ROUNDS, JWT_EXPIRY } from '../../utils/constants'
 
 interface UserConnector {
 	getAllUsers: Function

@@ -12,7 +12,7 @@ import './db/mongoose'
 
 const app = express()
 
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
 const graphqlServer = new ApolloServer({
 	typeDefs,
@@ -23,6 +23,8 @@ const graphqlServer = new ApolloServer({
 			return connectionParams
 		},
 	},
+	introspection: true,
+	playground: true,
 })
 
 app.use('*', cors())
@@ -33,18 +35,4 @@ graphqlServer.applyMiddleware({ app, path: '/graphql' })
 const httpServer = createServer(app)
 graphqlServer.installSubscriptionHandlers(httpServer)
 
-httpServer.listen(
-	PORT,
-	(): void => {
-		// eslint-disable-next-line
-		console.log(
-			`🚀 Server ready at http://localhost:${PORT}${graphqlServer.graphqlPath}`,
-		)
-		// eslint-disable-next-line
-		console.log(
-			`🚀 Subscriptions ready at ws://localhost:${PORT}${
-				graphqlServer.subscriptionsPath
-			}`,
-		)
-	},
-)
+httpServer.listen()

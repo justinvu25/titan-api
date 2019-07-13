@@ -1,5 +1,5 @@
-import { User as UserType } from '@/ts-types/generated'
-import { Context } from '@/ts-types/context'
+import { User as UserType } from '../../../ts-types/generated'
+import { Context } from '../../../ts-types/context'
 
 const getUsers = async (
 	_parent: object,
