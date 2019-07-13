@@ -4,10 +4,11 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "ts-node-dev -r tsconfig-paths/register src/index.ts",
+		"start": "node -r ./tsconfig-paths-bootstrap.js dist/index.js",
 		"lint": "eslint \"src/**/*.ts\"",
 		"format": "prettier --write \"**/*.{ts,js,json,md,yaml,yml}\"",
-		"generate-types": "gql-gen --config codegen.yml"
+		"generate-types": "gql-gen --config codegen.yml",
+		"build": "tsc -p ./tsconfig.build.json"
 	},
 	"repository": {
 		"type": "git",
