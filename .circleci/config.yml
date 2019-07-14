@@ -32,14 +32,16 @@ jobs:
       - attach_workspace:
           at: ~/tmp/circlci-now
       - run:
+          name: Create Build
+          command: yarn build
+      - run:
           name: Install Now CLI
-          command: yarn add global now
+          command: sudo npm install --global --unsafe-perm now
       - deploy:
           name: Deploy & Alias
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-                now --token $ZEIT_TOKEN -e MONGO_URL=$MONGO_URL JWT_SECRET=$JWT_SECRET 
-                # now --token $ZEIT_TOKEN
+                now -t $ZEIT_TOKEN -e MONGO_URL=$MONGO_URL -e JWT_SECRET=$JWT_SECRET 
             fi
 workflows:
   version: 2
