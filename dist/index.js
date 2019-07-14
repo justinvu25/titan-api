@@ -31,5 +31,10 @@ app.use(compression_1.default());
 graphqlServer.applyMiddleware({ app, path: '/graphql' });
 const httpServer = http_1.createServer(app);
 graphqlServer.installSubscriptionHandlers(httpServer);
-httpServer.listen();
+httpServer.listen(PORT, () => {
+    // eslint-disable-next-line
+    console.log(`🚀 Server ready at http://localhost:${PORT}${graphqlServer.graphqlPath}`);
+    // eslint-disable-next-line
+    console.log(`🚀 Subscriptions ready at ws://localhost:${PORT}${graphqlServer.subscriptionsPath}`);
+});
 //# sourceMappingURL=index.js.map
