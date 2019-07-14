@@ -2,9 +2,11 @@
 	"version": 2,
 	"builds": [{ "src": "dist/index.js", "use": "@now/node" }],
 	"routes": [{ "src": "/.*", "dest": "dist/index.js" }],
-	"env": {
-		"MONGO_URL": "@mongo_url",
-		"JWT_SECRET": "@jwt_secret"
-	},
-	"alias": ["https://titan-api.andrewn.now.sh", "titan-api"]
+	"alias": ["https://titan-api-cq5hry9cx.now.sh", "titan-api"],
+	"build": {
+		"env": {
+			"MONGO_URL": "@mongo_url",
+			"JWT_SECRET": "@jwt_secret"
+		}
+	}
 }
