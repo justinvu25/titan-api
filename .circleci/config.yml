@@ -1,0 +1,51 @@
+defaults: &defaults
+  docker:
+    - image: circleci/node:10.15.0
+  working_directory: ~/tmp/circlci-now
+
+version: 2
+jobs:
+  checkout:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/tmp/circlci-now
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+          name: yarn install
+          command: yarn
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: .
+          paths: .
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/tmp/circlci-now
+      - run:
+          name: Install Now CLI
+          command: yarn add global now
+      - deploy:
+          name: Deploy & Alias
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                now --token $ZEIT_TOKEN -e MONGO_URL=$MONGO_URL JWT_SECRET=$JWT_SECRET 
+                # now --token $ZEIT_TOKEN
+            fi
+workflows:
+  version: 2
+  test-deploy-purge:
+    jobs:
+      - checkout
+      - deploy:
+          requires:
+            - checkout
