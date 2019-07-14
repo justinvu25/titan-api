@@ -27,6 +27,17 @@ class RoomConnector {
 		return room
 	}
 
+	async removeUserFromRoom(
+		roomId: string,
+		userId: string,
+	): Promise<RoomPayload> {
+		const room = await Room.findOneAndUpdate(
+			{ _id: roomId },
+			{ $pull: { userIds: userId } },
+		)
+		return room
+	}
+
 	async getAllRooms(): Promise<RoomPayload[]> {
 		const room = await Room.find()
 		return room

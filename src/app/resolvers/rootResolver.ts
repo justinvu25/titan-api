@@ -15,6 +15,7 @@ import {
 	getAllRooms,
 	deleteRoom,
 	roomOwnerResolver,
+	leaveRoomResolver,
 } from './room'
 
 const mutationResolvers = {
@@ -25,6 +26,7 @@ const mutationResolvers = {
 	createRoom: createRoomResolver,
 	joinRoom: addUserToRoom,
 	deleteRoom,
+	leaveRoom: leaveRoomResolver,
 }
 
 const commonResolvers = {

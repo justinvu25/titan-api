@@ -20,6 +20,7 @@ const Mutation = gql`
 		createRoom(input: CreateRoomMutationArgs!): Room!
 		joinRoom(input: JoinRoomMutationArgs!): Room!
 		deleteRoom(input: DeleteRoomMutationArgs!): DeleteRoomMutationPayload!
+		leaveRoom(input: LeaveRoomMutationArgs!): LeaveRoomMutationPayload!
 	}
 
 	type Subscription {

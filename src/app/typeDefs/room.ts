@@ -16,6 +16,14 @@ export default gql`
 		id: String!
 	}
 
+	type LeaveRoomMutationPayload {
+		success: Boolean!
+	}
+
+	input LeaveRoomMutationArgs {
+		roomId: String!
+	}
+
 	input CreateRoomMutationArgs {
 		name: String!
 	}

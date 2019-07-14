@@ -32,6 +32,10 @@ export interface DeleteRoomMutationArgs {
 	roomId: string
 }
 
+export interface LeaveRoomMutationArgs {
+	roomId: string
+}
+
 export enum CacheControlScope {
 	Public = 'PUBLIC',
 	Private = 'PRIVATE',
@@ -100,6 +104,8 @@ export interface Mutation {
 	joinRoom: Room
 
 	deleteRoom: DeleteRoomMutationPayload
+
+	leaveRoom: LeaveRoomMutationPayload
 }
 
 export interface DeleteUserPayload {
@@ -114,6 +120,10 @@ export interface LoginPayload {
 
 export interface DeleteRoomMutationPayload {
 	id: string
+}
+
+export interface LeaveRoomMutationPayload {
+	success: boolean
 }
 
 export interface Subscription {
@@ -141,6 +151,9 @@ export interface JoinRoomMutationArgs {
 }
 export interface DeleteRoomMutationArgs {
 	input: DeleteRoomMutationArgs
+}
+export interface LeaveRoomMutationArgs {
+	input: LeaveRoomMutationArgs
 }
 
 import {
@@ -349,6 +362,12 @@ export interface MutationResolvers<TContext = {}, TypeParent = {}> {
 		TypeParent,
 		TContext
 	>
+
+	leaveRoom?: MutationLeaveRoomResolver<
+		LeaveRoomMutationPayload,
+		TypeParent,
+		TContext
+	>
 }
 
 export type MutationRegisterUserResolver<
@@ -410,6 +429,15 @@ export interface MutationDeleteRoomArgs {
 	input: DeleteRoomMutationArgs
 }
 
+export type MutationLeaveRoomResolver<
+	R = LeaveRoomMutationPayload,
+	Parent = {},
+	TContext = {}
+> = Resolver<R, Parent, TContext, MutationLeaveRoomArgs>
+export interface MutationLeaveRoomArgs {
+	input: LeaveRoomMutationArgs
+}
+
 export interface DeleteUserPayloadResolvers<
 	TContext = {},
 	TypeParent = DeleteUserPayload
@@ -453,6 +481,23 @@ export interface DeleteRoomMutationPayloadResolvers<
 export type DeleteRoomMutationPayloadIdResolver<
 	R = string,
 	Parent = DeleteRoomMutationPayload,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+
+export interface LeaveRoomMutationPayloadResolvers<
+	TContext = {},
+	TypeParent = LeaveRoomMutationPayload
+> {
+	success?: LeaveRoomMutationPayloadSuccessResolver<
+		boolean,
+		TypeParent,
+		TContext
+	>
+}
+
+export type LeaveRoomMutationPayloadSuccessResolver<
+	R = boolean,
+	Parent = LeaveRoomMutationPayload,
 	TContext = {}
 > = Resolver<R, Parent, TContext>
 
@@ -523,6 +568,7 @@ export type IResolvers<TContext = {}> = {
 	DeleteUserPayload?: DeleteUserPayloadResolvers<TContext>
 	LoginPayload?: LoginPayloadResolvers<TContext>
 	DeleteRoomMutationPayload?: DeleteRoomMutationPayloadResolvers<TContext>
+	LeaveRoomMutationPayload?: LeaveRoomMutationPayloadResolvers<TContext>
 	Subscription?: SubscriptionResolvers<TContext>
 	Upload?: GraphQLScalarType
 } & { [typeName: string]: never }
