@@ -3,10 +3,6 @@
 	"builds": [{ "src": "dist/index.js", "use": "@now/node" }],
 	"routes": [{ "src": "/.*", "dest": "dist/index.js" }],
 	"alias": ["https://titan-api-cq5hry9cx.now.sh", "titan-api"],
-	"env": {
-		"MONGO_URL": "@mongo_url",
-		"JWT_SECRET": "@jwt_secret"
-	},
 	"build": {
 		"env": {
 			"MONGO_URL": "@mongo_url",
