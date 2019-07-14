@@ -2,5 +2,5 @@
 	"version": 2,
 	"builds": [{ "src": "dist/index.js", "use": "@now/node" }],
 	"routes": [{ "src": "/.*", "dest": "dist/index.js" }],
-	"alias": ["https://titan-api.andrewn.now.sh", "titan-api"]
+	"alias": ["https://titan-api-cq5hry9cx.now.sh", "titan-api"]
 }
