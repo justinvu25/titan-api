@@ -7,6 +7,7 @@ export interface UserInput {
 export interface UpdateUserInput {
 	name?: string
 	email?: string
+	isReady?: string
 }
 
 export interface UserPayload {
