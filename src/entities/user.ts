@@ -9,6 +9,9 @@ class User extends Typegoose {
 
 	@prop({ required: true, trim: true })
 	password: string
+
+	@prop({ default: false })
+	isReady: boolean
 }
 
 export default new User().getModelForClass(User, {

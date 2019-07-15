@@ -5,6 +5,7 @@ export default gql`
 		_id: ID!
 		name: String!
 		email: String!
+		isReady: Boolean!
 		room: Room
 	}
 
@@ -20,6 +21,7 @@ export default gql`
 	input UpdateUserInput {
 		name: String
 		email: String
+		isReady: Boolean
 	}
 
 	input RegisterUserInput {

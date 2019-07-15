@@ -12,6 +12,8 @@ export interface UpdateUserInput {
 	name?: Maybe<string>
 
 	email?: Maybe<string>
+
+	isReady?: Maybe<boolean>
 }
 
 export interface LoginCredentials {
@@ -68,6 +70,8 @@ export interface User {
 	name: string
 
 	email: string
+
+	isReady: boolean
 
 	room?: Maybe<Room>
 }
@@ -249,6 +253,8 @@ export interface UserResolvers<TContext = {}, TypeParent = User> {
 
 	email?: UserEmailResolver<string, TypeParent, TContext>
 
+	isReady?: UserIsReadyResolver<boolean, TypeParent, TContext>
+
 	room?: UserRoomResolver<Maybe<Room>, TypeParent, TContext>
 }
 
@@ -264,6 +270,11 @@ export type UserNameResolver<
 > = Resolver<R, Parent, TContext>
 export type UserEmailResolver<
 	R = string,
+	Parent = User,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type UserIsReadyResolver<
+	R = boolean,
 	Parent = User,
 	TContext = {}
 > = Resolver<R, Parent, TContext>
