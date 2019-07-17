@@ -42,7 +42,7 @@ class UserConnector {
 		id: string,
 		update: UpdateUserInput,
 	): Promise<UserPayload> {
-		const user = await User.findByIdAndUpdate(id, { ...update })
+		const user = await User.findByIdAndUpdate(id, { ...update }, { new: true })
 		return user
 	}
 
