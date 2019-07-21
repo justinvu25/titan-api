@@ -9,15 +9,15 @@ const Query = gql`
 		user: User!
 		room: Room
 		rooms: [Room]!
-		restaurants(input: GetRestaurant): [Restaurant!]
+		restaurants(input: GetRestaurantArgs): [Restaurant!]
 	}
 `
 
 const Mutation = gql`
 	type Mutation {
-		registerUser(input: RegisterUserInput!): User!
+		registerUser(input: RegisterUserArgs!): User!
 		deleteUser: DeleteUserPayload!
-		updateUser(input: UpdateUserInput!): User!
+		updateUser(input: UpdateUserArgs!): User!
 		login(input: LoginCredentials!): LoginPayload!
 		createRoom(input: CreateRoomMutationArgs!): Room!
 		joinRoom(input: JoinRoomMutationArgs!): Room!

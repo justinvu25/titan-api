@@ -1,12 +1,12 @@
 export type Maybe<T> = T | null
 
-export interface GetRestaurant {
+export interface GetRestaurantArgs {
 	location: string
 
 	radius: number
 }
 
-export interface RegisterUserInput {
+export interface RegisterUserArgs {
 	name: string
 
 	email: string
@@ -14,7 +14,7 @@ export interface RegisterUserInput {
 	password: string
 }
 
-export interface UpdateUserInput {
+export interface UpdateUserArgs {
 	name?: Maybe<string>
 
 	email?: Maybe<string>
@@ -181,13 +181,13 @@ export interface Subscription {
 // ====================================================
 
 export interface RestaurantsQueryArgs {
-	input?: Maybe<GetRestaurant>
+	input?: Maybe<GetRestaurantArgs>
 }
 export interface RegisterUserMutationArgs {
-	input: RegisterUserInput
+	input: RegisterUserArgs
 }
 export interface UpdateUserMutationArgs {
-	input: UpdateUserInput
+	input: UpdateUserArgs
 }
 export interface LoginMutationArgs {
 	input: LoginCredentials
@@ -302,7 +302,7 @@ export type QueryRestaurantsResolver<
 	TContext = {}
 > = Resolver<R, Parent, TContext, QueryRestaurantsArgs>
 export interface QueryRestaurantsArgs {
-	input?: Maybe<GetRestaurant>
+	input?: Maybe<GetRestaurantArgs>
 }
 
 export interface UserResolvers<TContext = {}, TypeParent = User> {
@@ -557,7 +557,7 @@ export type MutationRegisterUserResolver<
 	TContext = {}
 > = Resolver<R, Parent, TContext, MutationRegisterUserArgs>
 export interface MutationRegisterUserArgs {
-	input: RegisterUserInput
+	input: RegisterUserArgs
 }
 
 export type MutationDeleteUserResolver<
@@ -571,7 +571,7 @@ export type MutationUpdateUserResolver<
 	TContext = {}
 > = Resolver<R, Parent, TContext, MutationUpdateUserArgs>
 export interface MutationUpdateUserArgs {
-	input: UpdateUserInput
+	input: UpdateUserArgs
 }
 
 export type MutationLoginResolver<

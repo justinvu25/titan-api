@@ -1,4 +1,5 @@
-import { RoomInput, RoomPayload } from '../../ts-types/room'
+import { GetRestaurantArgs } from '../../ts-types/generated'
+import { RestaurantPayloadMSYelp } from '../../ts-types/yelp'
 
 interface YelpConnector {
 	getRestaurants: Function
@@ -11,8 +12,10 @@ class Yelp {
 		this.connector = connector
 	}
 
-	async getRestaurants(restarauntOptions: any): Promise<any> {
-		const restaurants = this.connector.getRestaurants(restarauntOptions)
+	async getRestaurants(
+		getRestaurantArgs: GetRestaurantArgs,
+	): Promise<RestaurantPayloadMSYelp[]> {
+		const restaurants = this.connector.getRestaurants(getRestaurantArgs)
 		return restaurants
 	}
 }

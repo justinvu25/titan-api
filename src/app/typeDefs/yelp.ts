@@ -24,7 +24,7 @@ export default gql`
 		state: String!
 	}
 
-	input GetRestaurant {
+	input GetRestaurantArgs {
 		location: String!
 		radius: Int!
 	}

@@ -18,13 +18,13 @@ export default gql`
 		id: String!
 	}
 
-	input UpdateUserInput {
+	input UpdateUserArgs {
 		name: String
 		email: String
 		isReady: Boolean
 	}
 
-	input RegisterUserInput {
+	input RegisterUserArgs {
 		name: String!
 		email: String!
 		password: String!

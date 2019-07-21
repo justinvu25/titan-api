@@ -1,5 +1,6 @@
 import { Context } from '../../../ts-types/context'
 import { RestaurantsQueryArgs, Restaurant } from '../../../ts-types/generated'
+import { RestaurantPayloadMSYelp } from '../../../ts-types/yelp'
 
 const getRestaurantsResolver = async (
 	_parent: object,
@@ -13,7 +14,7 @@ const getRestaurantsResolver = async (
 	const restaurants = await Yelp.getRestaurants(args.input)
 
 	return restaurants.map(
-		(restaurant: any): object => {
+		(restaurant: RestaurantPayloadMSYelp): Restaurant => {
 			return {
 				id: restaurant.id,
 				rating: restaurant.rating,
