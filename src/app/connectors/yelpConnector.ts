@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { makeRequest } from '../../utils/apiService'
 import { yelpApi } from '../../utils/apiEndpoints'
 import { RestaurantPayloadMSYelp } from '../../ts-types/yelp'
 
@@ -14,15 +14,18 @@ class YelpConnector {
 		location,
 		radius,
 	}: GetRestaurantsInput): Promise<RestaurantPayloadMSYelp[]> {
-		const response = await axios.get(yelpApi.businessSearchEndpoint, {
+		const config = {
+			url: yelpApi.businessSearchEndpoint,
 			params: {
 				location,
 				radius,
 				limit: RESTAURANTS_TO_FETCH,
 			},
-			headers: { Authorization: `Bearer ${process.env.YELP_API_KEY}` },
-		})
-		return response.data.businesses
+			headers: {
+				Authorization: `Bearer ${process.env.YELP_API_KEY}`,
+			},
+		}
+		return makeRequest(config)
 	}
 }
 

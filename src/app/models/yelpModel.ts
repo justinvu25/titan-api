@@ -15,8 +15,10 @@ class Yelp {
 	async getRestaurants(
 		getRestaurantArgs: GetRestaurantArgs,
 	): Promise<RestaurantPayloadMSYelp[]> {
-		const restaurants = this.connector.getRestaurants(getRestaurantArgs)
-		return restaurants
+		const { businesses } = await this.connector.getRestaurants(
+			getRestaurantArgs,
+		)
+		return businesses
 	}
 }
 
