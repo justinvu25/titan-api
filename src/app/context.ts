@@ -3,6 +3,9 @@ import UserConnector from './connectors/userConnector'
 import RoomModel from './models/roomModel'
 import RoomConnector from './connectors/roomConnector'
 
+import YelpModel from './models/yelpModel'
+import YelpConnector from './connectors/yelpConnector'
+
 import pubsub from '../pubsub/pubsub'
 
 import { decodeJwt } from '../utils/jwtHelpers'
@@ -25,6 +28,7 @@ const context = async ({
 }): Promise<ContextReturnPayload> => {
 	const userConnector = new UserConnector()
 	const roomConnector = new RoomConnector()
+	const yelpConnector = new YelpConnector()
 
 	const models = {
 		User: new UserModel({
@@ -32,6 +36,9 @@ const context = async ({
 		}),
 		Room: new RoomModel({
 			connector: roomConnector,
+		}),
+		Yelp: new YelpModel({
+			connector: yelpConnector,
 		}),
 	}
 

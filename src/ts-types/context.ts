@@ -20,6 +20,9 @@ export interface Context {
 			deleteRoomByRoomId: Function
 			removeUserFromRoom: Function
 		}
+		Yelp: {
+			getRestaurants: Function
+		}
 	}
 	user: {
 		id: string

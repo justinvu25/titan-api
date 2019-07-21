@@ -1,6 +1,7 @@
 import { gql } from 'apollo-server-express'
 import User from './user'
 import Room from './room'
+import Yelp from './yelp'
 
 const Query = gql`
 	type Query {
@@ -8,6 +9,7 @@ const Query = gql`
 		user: User!
 		room: Room
 		rooms: [Room]!
+		restaurants(input: GetRestaurant): [Restaurant!]
 	}
 `
 
@@ -28,6 +30,6 @@ const Mutation = gql`
 	}
 `
 
-const typeDefs = [Query, Mutation, User, Room]
+const typeDefs = [Query, Mutation, User, Room, Yelp]
 
 export default typeDefs

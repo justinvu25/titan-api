@@ -18,6 +18,8 @@ import {
 	leaveRoomResolver,
 } from './room'
 
+import { getRestaurantsResolver } from './yelp'
+
 const mutationResolvers = {
 	registerUser,
 	updateUser: updateUserResolver,
@@ -45,6 +47,7 @@ const resolver = {
 		users: getUsers,
 		user: getUser,
 		rooms: getAllRooms,
+		restaurants: getRestaurantsResolver,
 	},
 	Mutation: mutationResolvers,
 	Subscription: {

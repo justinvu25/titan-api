@@ -1,5 +1,11 @@
 export type Maybe<T> = T | null
 
+export interface GetRestaurant {
+	location: string
+
+	radius: number
+}
+
 export interface RegisterUserInput {
 	name: string
 
@@ -62,6 +68,8 @@ export interface Query {
 	room?: Maybe<Room>
 
 	rooms: (Maybe<Room>)[]
+
+	restaurants?: Maybe<Restaurant[]>
 }
 
 export interface User {
@@ -92,6 +100,40 @@ export interface Room {
 	roomOwner: User
 
 	party: User[]
+}
+
+export interface Restaurant {
+	id: string
+
+	rating: number
+
+	phone: string
+
+	name: string
+
+	isClosed: boolean
+
+	categories?: Maybe<Category[]>
+
+	imageUrl: string
+
+	location: Location
+}
+
+export interface Category {
+	alias?: Maybe<string>
+
+	title?: Maybe<string>
+}
+
+export interface Location {
+	city: string
+
+	country: string
+
+	address?: Maybe<string>
+
+	state: string
 }
 
 export interface Mutation {
@@ -138,6 +180,9 @@ export interface Subscription {
 // Arguments
 // ====================================================
 
+export interface RestaurantsQueryArgs {
+	input?: Maybe<GetRestaurant>
+}
 export interface RegisterUserMutationArgs {
 	input: RegisterUserInput
 }
@@ -223,6 +268,12 @@ export interface QueryResolvers<TContext = {}, TypeParent = {}> {
 	room?: QueryRoomResolver<Maybe<Room>, TypeParent, TContext>
 
 	rooms?: QueryRoomsResolver<(Maybe<Room>)[], TypeParent, TContext>
+
+	restaurants?: QueryRestaurantsResolver<
+		Maybe<Restaurant[]>,
+		TypeParent,
+		TContext
+	>
 }
 
 export type QueryUsersResolver<
@@ -245,6 +296,14 @@ export type QueryRoomsResolver<
 	Parent = {},
 	TContext = {}
 > = Resolver<R, Parent, TContext>
+export type QueryRestaurantsResolver<
+	R = Maybe<Restaurant[]>,
+	Parent = {},
+	TContext = {}
+> = Resolver<R, Parent, TContext, QueryRestaurantsArgs>
+export interface QueryRestaurantsArgs {
+	input?: Maybe<GetRestaurant>
+}
 
 export interface UserResolvers<TContext = {}, TypeParent = User> {
 	_id?: User_IdResolver<string, TypeParent, TContext>
@@ -348,6 +407,117 @@ export type RoomRoomOwnerResolver<
 export type RoomPartyResolver<
 	R = User[],
 	Parent = Room,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+
+export interface RestaurantResolvers<TContext = {}, TypeParent = Restaurant> {
+	id?: RestaurantIdResolver<string, TypeParent, TContext>
+
+	rating?: RestaurantRatingResolver<number, TypeParent, TContext>
+
+	phone?: RestaurantPhoneResolver<string, TypeParent, TContext>
+
+	name?: RestaurantNameResolver<string, TypeParent, TContext>
+
+	isClosed?: RestaurantIsClosedResolver<boolean, TypeParent, TContext>
+
+	categories?: RestaurantCategoriesResolver<
+		Maybe<Category[]>,
+		TypeParent,
+		TContext
+	>
+
+	imageUrl?: RestaurantImageUrlResolver<string, TypeParent, TContext>
+
+	location?: RestaurantLocationResolver<Location, TypeParent, TContext>
+}
+
+export type RestaurantIdResolver<
+	R = string,
+	Parent = Restaurant,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type RestaurantRatingResolver<
+	R = number,
+	Parent = Restaurant,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type RestaurantPhoneResolver<
+	R = string,
+	Parent = Restaurant,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type RestaurantNameResolver<
+	R = string,
+	Parent = Restaurant,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type RestaurantIsClosedResolver<
+	R = boolean,
+	Parent = Restaurant,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type RestaurantCategoriesResolver<
+	R = Maybe<Category[]>,
+	Parent = Restaurant,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type RestaurantImageUrlResolver<
+	R = string,
+	Parent = Restaurant,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type RestaurantLocationResolver<
+	R = Location,
+	Parent = Restaurant,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+
+export interface CategoryResolvers<TContext = {}, TypeParent = Category> {
+	alias?: CategoryAliasResolver<Maybe<string>, TypeParent, TContext>
+
+	title?: CategoryTitleResolver<Maybe<string>, TypeParent, TContext>
+}
+
+export type CategoryAliasResolver<
+	R = Maybe<string>,
+	Parent = Category,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type CategoryTitleResolver<
+	R = Maybe<string>,
+	Parent = Category,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+
+export interface LocationResolvers<TContext = {}, TypeParent = Location> {
+	city?: LocationCityResolver<string, TypeParent, TContext>
+
+	country?: LocationCountryResolver<string, TypeParent, TContext>
+
+	address?: LocationAddressResolver<Maybe<string>, TypeParent, TContext>
+
+	state?: LocationStateResolver<string, TypeParent, TContext>
+}
+
+export type LocationCityResolver<
+	R = string,
+	Parent = Location,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type LocationCountryResolver<
+	R = string,
+	Parent = Location,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type LocationAddressResolver<
+	R = Maybe<string>,
+	Parent = Location,
+	TContext = {}
+> = Resolver<R, Parent, TContext>
+export type LocationStateResolver<
+	R = string,
+	Parent = Location,
 	TContext = {}
 > = Resolver<R, Parent, TContext>
 
@@ -575,6 +745,9 @@ export type IResolvers<TContext = {}> = {
 	Query?: QueryResolvers<TContext>
 	User?: UserResolvers<TContext>
 	Room?: RoomResolvers<TContext>
+	Restaurant?: RestaurantResolvers<TContext>
+	Category?: CategoryResolvers<TContext>
+	Location?: LocationResolvers<TContext>
 	Mutation?: MutationResolvers<TContext>
 	DeleteUserPayload?: DeleteUserPayloadResolvers<TContext>
 	LoginPayload?: LoginPayloadResolvers<TContext>
