@@ -44,6 +44,10 @@ export interface LeaveRoomMutationArgs {
 	roomId: string
 }
 
+export interface StartSessionsForRoomMutationArgs {
+	roomId: string
+}
+
 export enum CacheControlScope {
 	Public = 'PUBLIC',
 	Private = 'PRIVATE',
@@ -152,6 +156,8 @@ export interface Mutation {
 	deleteRoom: DeleteRoomMutationPayload
 
 	leaveRoom: LeaveRoomMutationPayload
+
+	startSession?: Maybe<Room>
 }
 
 export interface DeleteUserPayload {
@@ -203,6 +209,9 @@ export interface DeleteRoomMutationArgs {
 }
 export interface LeaveRoomMutationArgs {
 	input: LeaveRoomMutationArgs
+}
+export interface StartSessionMutationArgs {
+	input: StartSessionsForRoomMutationArgs
 }
 
 import {
@@ -549,6 +558,8 @@ export interface MutationResolvers<TContext = {}, TypeParent = {}> {
 		TypeParent,
 		TContext
 	>
+
+	startSession?: MutationStartSessionResolver<Maybe<Room>, TypeParent, TContext>
 }
 
 export type MutationRegisterUserResolver<
@@ -617,6 +628,15 @@ export type MutationLeaveRoomResolver<
 > = Resolver<R, Parent, TContext, MutationLeaveRoomArgs>
 export interface MutationLeaveRoomArgs {
 	input: LeaveRoomMutationArgs
+}
+
+export type MutationStartSessionResolver<
+	R = Maybe<Room>,
+	Parent = {},
+	TContext = {}
+> = Resolver<R, Parent, TContext, MutationStartSessionArgs>
+export interface MutationStartSessionArgs {
+	input: StartSessionsForRoomMutationArgs
 }
 
 export interface DeleteUserPayloadResolvers<

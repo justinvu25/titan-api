@@ -35,4 +35,8 @@ export default gql`
 	input DeleteRoomMutationArgs {
 		roomId: String!
 	}
+
+	input StartSessionsForRoomMutationArgs {
+		roomId: String!
+	}
 `

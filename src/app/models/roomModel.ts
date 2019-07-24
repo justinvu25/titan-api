@@ -1,4 +1,5 @@
 import { RoomInput, RoomPayload } from '../../ts-types/room'
+import { Room as RoomType } from '../../ts-types/generated'
 
 interface RoomConnector {
 	createRoom: Function
@@ -7,6 +8,7 @@ interface RoomConnector {
 	getAllRooms: Function
 	deleteRoomByRoomId: Function
 	removeUserFromRoom: Function
+	updateRoomByRoomId: Function
 }
 
 class Room {
@@ -46,6 +48,14 @@ class Room {
 
 	async deleteRoomByRoomId(roomId: string): Promise<RoomPayload> {
 		const room = await this.connector.deleteRoomByRoomId(roomId)
+		return room
+	}
+
+	async updateRoomByRoomId(
+		roomId: string,
+		update: RoomType,
+	): Promise<RoomPayload> {
+		const room = await this.connector.updateRoomByRoomId(roomId, update)
 		return room
 	}
 }

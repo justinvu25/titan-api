@@ -19,6 +19,7 @@ export interface Context {
 			getAllRooms: Function
 			deleteRoomByRoomId: Function
 			removeUserFromRoom: Function
+			updateRoomByRoomId: Function
 		}
 		Yelp: {
 			getRestaurants: Function

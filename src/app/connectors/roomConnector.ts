@@ -1,5 +1,6 @@
 import Room from '../../entities/room'
 import { RoomInput, RoomPayload } from '../../ts-types/room'
+import { Room as RoomType } from '../../ts-types/generated'
 import pinGenerator from '../../utils/pinGenerator'
 
 class RoomConnector {
@@ -45,6 +46,18 @@ class RoomConnector {
 
 	async deleteRoomByRoomId(roomId: string): Promise<RoomPayload> {
 		const room = await Room.findByIdAndDelete(roomId)
+		return room
+	}
+
+	async updateRoomByRoomId(
+		roomId: string,
+		update: RoomType,
+	): Promise<RoomPayload> {
+		const room = await Room.findByIdAndUpdate(
+			roomId,
+			{ ...update },
+			{ new: true },
+		)
 		return room
 	}
 }

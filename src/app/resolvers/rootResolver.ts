@@ -16,6 +16,7 @@ import {
 	deleteRoom,
 	roomOwnerResolver,
 	leaveRoomResolver,
+	startSessionsForRoomResolver,
 } from './room'
 
 import { getRestaurantsResolver } from './yelp'
@@ -29,6 +30,7 @@ const mutationResolvers = {
 	joinRoom: addUserToRoom,
 	deleteRoom,
 	leaveRoom: leaveRoomResolver,
+	startSession: startSessionsForRoomResolver,
 }
 
 const commonResolvers = {
